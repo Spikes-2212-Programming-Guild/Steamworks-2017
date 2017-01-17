@@ -1,15 +1,21 @@
 package org.usfirst.frc.team2212.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Orienate extends Command {
+public class OrientateToBoiler extends Command {
 
-    public Orienate(double turningSpeed) {
+    public OrientateToBoiler(Supplier<Double> turningSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    }
+    
+    public OrientateToBoiler(double turningSpeed) {
+       this(()-> turningSpeed);
     }
 
     // Called just before this Command runs the first time
