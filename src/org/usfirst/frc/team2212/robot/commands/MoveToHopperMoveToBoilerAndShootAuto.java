@@ -15,27 +15,27 @@ public class MoveToHopperMoveToBoilerAndShootAuto extends CommandGroup {
 
     public MoveToHopperMoveToBoilerAndShootAuto(TankDrivetrain drivetrain) {
     	
-    	Supplier<Double> StartSpeed = ConstantHandler.addConstantDouble("StartSpeed", 0.5);
-    	Supplier<Double> StartTime = ConstantHandler.addConstantDouble("StartTime", 3);
+    	Supplier<Double> startSpeed = ConstantHandler.addConstantDouble("startSpeed", 0.5);
+    	Supplier<Double> startTime = ConstantHandler.addConstantDouble("startTime", 3);
     	
-    	Supplier<Double> TurnToHopperSpeed = ConstantHandler.addConstantDouble("TurnToHopperSpeed", 0.5);
-    	Supplier<Double> MoveToHopperSpeed = ConstantHandler.addConstantDouble("MoveToHopperSpeed", 0.5);
-    	Supplier<Double> MoveToHopperTime = ConstantHandler.addConstantDouble("MoveToHopperTime", 3);
+    	Supplier<Double> turnToHopperSpeed = ConstantHandler.addConstantDouble("turnToHopperSpeed", 0.5);
+    	Supplier<Double> moveToHopperSpeed = ConstantHandler.addConstantDouble("moveToHopperSpeed", 0.5);
+    	Supplier<Double> moveToHopperTime = ConstantHandler.addConstantDouble("moveToHopperTime", 3);
     	
-    	Supplier<Double> DeltaSpeed = ConstantHandler.addConstantDouble("DeltaSpeed", 0.5);
-    	Supplier<Double> DeltaTime = ConstantHandler.addConstantDouble("DeltaTime", 3);
+    	Supplier<Double> moveFromHopperToBoilerSpeed = ConstantHandler.addConstantDouble("moveFromHopperToBoilerSpeed", 0.5);
+    	Supplier<Double> moveFromHopperToBoilerTime = ConstantHandler.addConstantDouble("moveFromHopperToBoilerTime", 3);
     	
-    	Supplier<Double> TurnToBoilerSpeed = ConstantHandler.addConstantDouble("TurnToHopperSpeed", 0.5);
-    	Supplier<Double> MoveToBoilerSpeed = ConstantHandler.addConstantDouble("MoveToHopperSpeed", 0.5);
-    	Supplier<Double> MoveToBoilerTime = ConstantHandler.addConstantDouble("MoveToHopperTime", 3);
+    	Supplier<Double> turnToBoilerSpeed = ConstantHandler.addConstantDouble("turnToHopperSpeed", 0.5);
+    	Supplier<Double> moveToBoilerSpeed = ConstantHandler.addConstantDouble("toveToHopperSpeed", 0.5);
+    	Supplier<Double> moveToBoilerTime = ConstantHandler.addConstantDouble("tSoveToHopperTime", 3);
     	
-        addSequential(new DriveTank(drivetrain, StartSpeed, StartSpeed), StartTime.get());
-        addSequential(new OrientateToHopper(TurnToHopperSpeed));
-        addSequential(new DriveTank(drivetrain, MoveToHopperSpeed, MoveToHopperSpeed),MoveToHopperTime.get());
+        addSequential(new DriveTank(drivetrain, startSpeed, startSpeed), startTime.get());
+        addSequential(new OrientateToHopper(turnToHopperSpeed));
+        addSequential(new DriveTank(drivetrain, moveToHopperSpeed, moveToHopperSpeed),moveToHopperTime.get());
         
-        addSequential(new DriveTank(drivetrain, DeltaSpeed, DeltaSpeed), DeltaTime.get());
-        addSequential(new OrientateToBoiler(TurnToBoilerSpeed));
-        addSequential(new DriveTank(drivetrain, MoveToBoilerSpeed, MoveToBoilerSpeed),MoveToBoilerTime.get());
+        addSequential(new DriveTank(drivetrain, moveFromHopperToBoilerSpeed, moveFromHopperToBoilerSpeed), moveFromHopperToBoilerTime.get());
+        addSequential(new OrientateToBoiler(turnToBoilerSpeed));
+        addSequential(new DriveTank(drivetrain, moveToBoilerSpeed, moveToBoilerSpeed),moveToBoilerTime.get());
          
     }
 }

@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveAndDropGearAuto extends CommandGroup {
 
     public MoveAndDropGearAuto(TankDrivetrain drivetrain) {
-    	Supplier<Double> Speed = ConstantHandler.addConstantDouble("Speed", 0.5);
-    	Supplier<Double> Time = ConstantHandler.addConstantDouble("Time", 3);
+    	Supplier<Double> speed = ConstantHandler.addConstantDouble("speed", 0.5);
+    	Supplier<Double> time = ConstantHandler.addConstantDouble("time", 3);
     	
-        addSequential(new DriveTank(drivetrain, Speed, Speed), Time.get());
+        addSequential(new DriveTank(drivetrain, speed, speed), time.get());
         addSequential(new DropGear());
     }
 }

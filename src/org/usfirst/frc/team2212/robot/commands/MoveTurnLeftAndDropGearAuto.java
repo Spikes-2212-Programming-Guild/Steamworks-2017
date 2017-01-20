@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveTurnLeftAndDropGearAuto extends CommandGroup {
 
 	 public MoveTurnLeftAndDropGearAuto(TankDrivetrain drivetrain) {
-	    	Supplier<Double> MovingSpeed = ConstantHandler.addConstantDouble("MovigSpeed", 0.5);
-	    	Supplier<Double> TurningSpeed = ConstantHandler.addConstantDouble("TurningSpeed", 0.5);
-	    	Supplier<Double> SecendMovementTime = ConstantHandler.addConstantDouble("SecendMovementTime", 1);
-	    	Supplier<Double> FirstMovementTime = ConstantHandler.addConstantDouble("FirstMovementTime", 4);
-	        addSequential(new DriveTank(drivetrain, MovingSpeed, MovingSpeed), FirstMovementTime.get());
-	        addSequential(new OrienateToGear(TurningSpeed));
-	        addSequential(new DriveTank(drivetrain, MovingSpeed, MovingSpeed), SecendMovementTime.get());
+	    	Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("movigSpeed", 0.5);
+	    	Supplier<Double> turningSpeed = ConstantHandler.addConstantDouble("turningSpeed", 0.5);
+	    	Supplier<Double> moveToGearTime = ConstantHandler.addConstantDouble("moveToGearTime", 1);
+	    	Supplier<Double> movingTime = ConstantHandler.addConstantDouble("movingTime", 4);
+	        addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
+	        addSequential(new OrienateToGear(turningSpeed));
+	        addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), moveToGearTime.get());
 	    }
 }

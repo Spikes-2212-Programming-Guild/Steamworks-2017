@@ -14,21 +14,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
     public MoveDropGearMoveToBoilerAndShootAuto(TankDrivetrain drivetrain) {
-    	Supplier<Double> Speed = ConstantHandler.addConstantDouble("Speed", 0.5);
-    	Supplier<Double> Time = ConstantHandler.addConstantDouble("Time", 3);
+    	Supplier<Double> speed = ConstantHandler.addConstantDouble("speed", 0.5);
+    	Supplier<Double> time = ConstantHandler.addConstantDouble("time", 3);
     	
-    	Supplier<Double> SecondSpeed = ConstantHandler.addConstantDouble("SecondSpeed", 0.5);
-    	Supplier<Double> SecondTime = ConstantHandler.addConstantDouble("SecondTime", 3);
+    	Supplier<Double> moveToGearSpeed = ConstantHandler.addConstantDouble("moveToGearSpeed", 0.5);
+    	Supplier<Double> moveToGearTime = ConstantHandler.addConstantDouble("moveToGearTime", 3);
     	
-    	Supplier<Double> TurnToBoilerSpeed = ConstantHandler.addConstantDouble("TurnToBoilerSpeed", 0.5);
-    	Supplier<Double> MoveToBoilerSpeed = ConstantHandler.addConstantDouble("MoveToBoilerSpeed", 0.5);
-    	Supplier<Double> MoveToBoilerTime = ConstantHandler.addConstantDouble("MoveToBoilerTime", 3);
+    	Supplier<Double> turnToBoilerSpeed = ConstantHandler.addConstantDouble("turnToBoilerSpeed", 0.5);
+    	Supplier<Double> moveToBoilerSpeed = ConstantHandler.addConstantDouble("moveToBoilerSpeed", 0.5);
+    	Supplier<Double> moveToBoilerTime = ConstantHandler.addConstantDouble("msoveToBoilerTime", 3);
     	
-        addSequential(new DriveTank(drivetrain, Speed, Speed), Time.get());
+        addSequential(new DriveTank(drivetrain, speed, speed), time.get());
         addSequential(new DropGear());
         
-        addSequential(new DriveTank(drivetrain, SecondSpeed, SecondSpeed), SecondTime.get());
-        addSequential(new OrientateToBoiler(TurnToBoilerSpeed));
-        addSequential(new DriveTank(drivetrain, MoveToBoilerSpeed, MoveToBoilerSpeed),MoveToBoilerTime.get());
+        addSequential(new DriveTank(drivetrain, moveToGearSpeed, moveToGearSpeed), moveToGearSpeed.get());
+        addSequential(new OrientateToBoiler(turnToBoilerSpeed));
+        addSequential(new DriveTank(drivetrain, moveToBoilerSpeed, moveToBoilerSpeed),moveToBoilerTime.get());
     }
 }
