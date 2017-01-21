@@ -31,5 +31,6 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
         
         addSequential(new DriveTank(drivetrain, moveToGearSpeed, moveToGearSpeed), moveToGearSpeed.get());
         addSequential(new OrientateToBoiler(turnToBoilerSpeed));
+        addSequential(new ShootToBoiler());
     }
 }
