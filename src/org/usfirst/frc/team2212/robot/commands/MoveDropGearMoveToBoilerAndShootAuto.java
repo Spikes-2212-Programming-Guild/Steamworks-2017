@@ -14,23 +14,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
     public MoveDropGearMoveToBoilerAndShootAuto(TankDrivetrain drivetrain) {
-    	Supplier<Double> speed = ConstantHandler.addConstantDouble("speed", 0.5);
-    	Supplier<Double> time = ConstantHandler.addConstantDouble("time", 3);
+    	Supplier<Double> movingSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("movingSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
+    	Supplier<Double> movingTimeMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("movingTimeMoveDropGearMoveToBoilerAndShootAuto", 3);
     	
-    	Supplier<Double> turnToGearSpeed = ConstantHandler.addConstantDouble("turnToGearSpeed", 3);
-    	Supplier<Double> moveToGearSpeed = ConstantHandler.addConstantDouble("moveToGearSpeed", 0.5);
-    	Supplier<Double> moveToGearTime = ConstantHandler.addConstantDouble("moveToGearTime", 3);
+    	Supplier<Double> turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto", 3);
     	
-    	Supplier<Double> turnToBoilerSpeed = ConstantHandler.addConstantDouble("turnToBoilerSpeed", 0.5);
-    	Supplier<Double> moveToBoilerSpeed = ConstantHandler.addConstantDouble("moveToBoilerSpeed", 0.5);
-    	Supplier<Double> moveToBoilerTime = ConstantHandler.addConstantDouble("msoveToBoilerTime", 3);
+    	Supplier<Double> turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
+    	Supplier<Double> moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
+    	Supplier<Double> moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto", 3);
     	
-        addSequential(new DriveTank(drivetrain, speed, speed), time.get());
-        addSequential(new OrienateToGear(turnToGearSpeed));
+        addSequential(new DriveTank(drivetrain, movingSpeedMoveDropGearMoveToBoilerAndShootAuto, movingSpeedMoveDropGearMoveToBoilerAndShootAuto), movingTimeMoveDropGearMoveToBoilerAndShootAuto.get());
+        addSequential(new OrienateToGear(turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto));
         addSequential(new DropGear());
         
-        addSequential(new DriveTank(drivetrain, moveToGearSpeed, moveToGearSpeed), moveToGearSpeed.get());
-        addSequential(new OrientateToBoiler(turnToBoilerSpeed));
+        addSequential(new DriveTank(drivetrain, moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto, moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto), moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto.get());
+        addSequential(new OrientateToBoiler(turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto));
         addSequential(new ShootToBoiler());
     }
 }
