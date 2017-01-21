@@ -15,7 +15,7 @@ public class MoveTurnLeftAndDropGearAuto extends CommandGroup {
 
 	 public MoveTurnLeftAndDropGearAuto(TankDrivetrain drivetrain) {
 	    	Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("movigSpeed", -0.5);
-	    	Supplier<Double> turningSpeed = ConstantHandler.addConstantDouble("turningSpeed", 0.5);
+	    	Supplier<Double> turningSpeed = ConstantHandler.addConstantDouble("turningSpeed", -0.5);
 	    	Supplier<Double> moveToGearTime = ConstantHandler.addConstantDouble("moveToGearTime", 1);
 	    	Supplier<Double> movingTime = ConstantHandler.addConstantDouble("movingTime", 4);
 	      
