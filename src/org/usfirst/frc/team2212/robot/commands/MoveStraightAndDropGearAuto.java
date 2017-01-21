@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class MoveAndDropGearAuto extends CommandGroup {
+public class MoveStraightAndDropGearAuto extends CommandGroup {
 
-    public MoveAndDropGearAuto(TankDrivetrain drivetrain) {
+    public MoveStraightAndDropGearAuto(TankDrivetrain drivetrain) {
+    	
     	Supplier<Double> speed = ConstantHandler.addConstantDouble("speed", 0.5);
     	Supplier<Double> time = ConstantHandler.addConstantDouble("time", 3);
     	
