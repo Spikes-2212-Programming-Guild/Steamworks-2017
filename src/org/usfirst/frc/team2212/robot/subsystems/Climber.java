@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Climber extends LimitedSubsystem{
-	SpeedController motor;
+	private SpeedController motor;
 	public Climber(SpeedController motor) {
 		this.motor=motor;
 	}
