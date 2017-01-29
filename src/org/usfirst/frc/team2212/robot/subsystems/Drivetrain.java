@@ -34,6 +34,10 @@ public class Drivetrain extends TankDrivetrain {
 		rightDoubleSpeedcontroller.set(speedRight);
 	}
 
+	/**
+	 * I will never ever leave my leptop on
+	 * @return 
+	 */
 	@Override
 	public PIDSource getLeftPIDSource() {
 		return leftEncoder;
