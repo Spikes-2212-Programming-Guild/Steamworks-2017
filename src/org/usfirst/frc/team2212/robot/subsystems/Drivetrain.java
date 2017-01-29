@@ -3,6 +3,7 @@ package org.usfirst.frc.team2212.robot.subsystems;
 import com.spikes2212.genericsubsystems.drivetrains.TankDrivetrain;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,11 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drivetrain extends TankDrivetrain {
 	DoubleSpeedcontroller leftDoubleSpeedcontroller;
 	DoubleSpeedcontroller rightDoubleSpeedcontroller;
+	Encoder leftEncoder;
+	Encoder rightEncoder;
 
-	public Drivetrain(DoubleSpeedcontroller leftDoubleSpeedcontroller,
-			DoubleSpeedcontroller rightDoubleSpeedcontroller) {
+	public Drivetrain(DoubleSpeedcontroller leftDoubleSpeedcontroller, DoubleSpeedcontroller rightDoubleSpeedcontroller,
+			Encoder leftEncoder, Encoder rightEncoder) {
 		this.leftDoubleSpeedcontroller = leftDoubleSpeedcontroller;
 		this.rightDoubleSpeedcontroller = rightDoubleSpeedcontroller;
+		this.leftEncoder=leftEncoder;
+		this.rightEncoder=rightEncoder;
 	}
 
 	@Override
@@ -31,12 +36,12 @@ public class Drivetrain extends TankDrivetrain {
 
 	@Override
 	public PIDSource getLeftPIDSource() {
-		return null;
+		return leftEncoder;
 	}
 
 	@Override
 	public PIDSource getRightPIDSource() {
-		return null;
+		return rightEncoder;
 	}
 
 	@Override
