@@ -15,10 +15,10 @@ public class MoveStraightAndDropGearAuto extends CommandGroup {
 
     public MoveStraightAndDropGearAuto(TankDrivetrain drivetrain) {
     	
-    	Supplier<Double> movingSpeedMoveStraightAndDropGearAuto = ConstantHandler.addConstantDouble("movingSpeedMoveStraightAndDropGearAuto", 0.5);
-    	Supplier<Double> movingTimeMoveStraightAndDropGearAuto = ConstantHandler.addConstantDouble("movingTimeMoveStraightAndDropGearAuto", 3);
+    	Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("MoveStraightAndDropGearAuto-movingSpeed", 0.5);
+    	Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveStraightAndDropGearAuto-movingTime", 3);
     	
-        addSequential(new DriveTank(drivetrain, movingSpeedMoveStraightAndDropGearAuto, movingSpeedMoveStraightAndDropGearAuto), movingTimeMoveStraightAndDropGearAuto.get());
+        addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
         addSequential(new DropGear());
     }
 }

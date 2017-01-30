@@ -14,21 +14,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
     public MoveDropGearMoveToBoilerAndShootAuto(TankDrivetrain drivetrain) {
-    	Supplier<Double> movingSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("movingSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
-    	Supplier<Double> movingTimeMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("movingTimeMoveDropGearMoveToBoilerAndShootAuto", 3);
+    	Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-movingSpeed", 0.5);
+    	Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-movingTime", 3);
     	
-    	Supplier<Double> turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto", 3);
+    	Supplier<Double> turnToGearSpeed = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-turnToGearSpeed", 3);
     	
-    	Supplier<Double> turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
-    	Supplier<Double> moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto", 0.5);
-    	Supplier<Double> moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto = ConstantHandler.addConstantDouble("moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto", 3);
+    	Supplier<Double> turnToBoilerSpeed = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-turnToBoilerSpeed", 0.5);
+    	Supplier<Double> moveToBoilerSpeed = ConstantHandler.addConstantDouble("DropGearMoveToBoilerAndShootAuto-moveToBoilerSpeedMove", 0.5);
+    	Supplier<Double> moveToBoilerTime = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-moveToBoilerTime", 3);
     	
-        addSequential(new DriveTank(drivetrain, movingSpeedMoveDropGearMoveToBoilerAndShootAuto, movingSpeedMoveDropGearMoveToBoilerAndShootAuto), movingTimeMoveDropGearMoveToBoilerAndShootAuto.get());
-        addSequential(new OrienateToGear(turnToGearSpeedMoveDropGearMoveToBoilerAndShootAuto));
+        addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
+        addSequential(new OrienateToGear(turnToGearSpeed));
         addSequential(new DropGear());
         
-        addSequential(new DriveTank(drivetrain, moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto, moveToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto), moveToBoilerTimeMoveDropGearMoveToBoilerAndShootAuto.get());
-        addSequential(new OrientateToBoiler(turnToBoilerSpeedMoveDropGearMoveToBoilerAndShootAuto));
+        addSequential(new DriveTank(drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
+        addSequential(new OrientateToBoiler(turnToBoilerSpeed));
         addSequential(new ShootToBoiler());
     }
 }

@@ -15,14 +15,14 @@ public class MoveAndShootToBoiler extends CommandGroup {
 
     public MoveAndShootToBoiler(TankDrivetrain drivetrain) {
     	
-    	Supplier<Double> movingSpeedMoveAndShootToBoiler = ConstantHandler.addConstantDouble("movingSpeedMoveAndShootToBoiler", 0.5);
-		Supplier<Double> turningSpeedMoveAndShootToBoiler = ConstantHandler.addConstantDouble("turningSpeedMoveAndShootToBoiler", 0.5);
-		Supplier<Double> moveToBoilerTimeMoveAndShootToBoiler = ConstantHandler.addConstantDouble("moveToBoilerTimeMoveAndShootToBoiler", 1);
-		Supplier<Double> movingTimeMoveAndShootToBoiler = ConstantHandler.addConstantDouble("movingTimeMoveAndShootToBoiler", 4);
+    	Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingSpeed", 0.5);
+		Supplier<Double> turningSpeed = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-turningSpeed", 0.5);
+		Supplier<Double> movingToBoilerTime = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingToBoilerTime", 1);
+		Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingTime", 4);
 		
-		addSequential(new DriveTank(drivetrain, movingSpeedMoveAndShootToBoiler, movingSpeedMoveAndShootToBoiler), movingTimeMoveAndShootToBoiler.get());
-		addSequential(new OrientateToBoiler(turningSpeedMoveAndShootToBoiler));
-		addSequential(new DriveTank(drivetrain, movingSpeedMoveAndShootToBoiler, movingSpeedMoveAndShootToBoiler), moveToBoilerTimeMoveAndShootToBoiler.get());
+		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
+		addSequential(new OrientateToBoiler(turningSpeed));
+		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingToBoilerTime.get());
 		addSequential(new ShootToBoiler());
     }
 }
