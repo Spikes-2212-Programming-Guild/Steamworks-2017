@@ -2,50 +2,19 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import org.usfirst.frc.team2212.robot.ImageProssecingConstants;
+import org.usfirst.frc.team2212.robot.Robot;
 
-public class OrienteToGear extends Command{
-	
-	private String tableName; 
-	private NetworkTable networkTable;
-	
-	private Supplier<Double> speed;
-	private boolean isUpdated;
-	public OrienteToGear(Supplier<Double> speed){
-		networkTable = NetworkTable.getTable(tableName);
-		this.speed = speed;
-		requires(org.usfirst.frc.team2212.robot.Robot.drivetrain);
-	}
-	
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		super.initialize();
-	}
+import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTankWithPID;
 
-	@Override
-	protected void execute() {
-		org.usfirst.frc.team2212.robot.Robot.drivetrain.tankDrive(speed.get(), -speed.get());
-	}
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-	@Override
-	protected void end() {
-		// TODO Auto-generated method stub
-		super.end();
-	}
+public class OrienteToGear extends CommandGroup {
 
-	@Override
-	protected void interrupted() {
-		// TODO Auto-generated method stub
-		super.interrupted();
+	public OrienteToGear(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
+		addSequential(new OrienteToTwoObjects(rotateSpeedSupplier));
+		addSequential(new DriveTankWithPID(Robot.drivetrain, ImageProssecingConstants.leftSource,
+				ImageProssecingConstants.rightSource, ImageProssecingConstants.GEARS_SET_POINT.get(),
+				ImageProssecingConstants.GEARS_SET_POINT.get(), KP, KI, KD, tolerance));
 	}
-
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		
-		return isUpdated;
-	}
-
 }
