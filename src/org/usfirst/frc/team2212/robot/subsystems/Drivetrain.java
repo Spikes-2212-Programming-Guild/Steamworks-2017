@@ -5,33 +5,34 @@ import com.spikes2212.utils.DoubleSpeedcontroller;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Drivetrain extends TankDrivetrain {
-	DoubleSpeedcontroller leftDoubleSpeedcontroller;
-	DoubleSpeedcontroller rightDoubleSpeedcontroller;
-	Encoder leftEncoder;
-	Encoder rightEncoder;
+	private SpeedController leftSpeedcontroller;
+	private SpeedController rightSpeedcontroller;
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 
-	public Drivetrain(DoubleSpeedcontroller leftDoubleSpeedcontroller, DoubleSpeedcontroller rightDoubleSpeedcontroller,
+	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller,
 			Encoder leftEncoder, Encoder rightEncoder) {
-		this.leftDoubleSpeedcontroller = leftDoubleSpeedcontroller;
-		this.rightDoubleSpeedcontroller = rightDoubleSpeedcontroller;
+		this.leftSpeedcontroller = leftSpeedcontroller;
+		this.rightSpeedcontroller = rightSpeedcontroller;
 		this.leftEncoder=leftEncoder;
 		this.rightEncoder=rightEncoder;
 	}
 
 	@Override
 	public void setLeft(double speedLeft) {
-		leftDoubleSpeedcontroller.set(speedLeft);
+		leftSpeedcontroller.set(speedLeft);
 	}
 
 	@Override
 	public void setRight(double speedRight) {
-		rightDoubleSpeedcontroller.set(speedRight);
+		rightSpeedcontroller.set(speedRight);
 	}
 
 	/**
