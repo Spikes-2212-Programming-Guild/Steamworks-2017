@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Picker extends LimitedSubsystem {
-	
+
 	private SpeedController motor;
-	
+
 	public Picker(SpeedController motor) {
-		this.motor=motor;
+		this.motor = motor;
 	}
-	
+
 	@Override
 	public boolean isMin() {
 		return false;
@@ -37,4 +37,3 @@ public class Picker extends LimitedSubsystem {
 		motor.set(speed);
 	}
 }
-
