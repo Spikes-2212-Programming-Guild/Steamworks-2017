@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
-
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
@@ -10,10 +9,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Climber extends LimitedSubsystem{
+public class Climber extends LimitedSubsystem {
 	private SpeedController motor;
+
 	public Climber(SpeedController motor) {
-		this.motor=motor;
+		this.motor = motor;
 	}
 
 	@Override
@@ -39,4 +39,3 @@ public class Climber extends LimitedSubsystem{
 		motor.set(speed);
 	}
 }
-
