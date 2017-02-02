@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GearDropper extends LimitedSubsystem{
-	
+public class GearDropper extends LimitedSubsystem {
+
 	private SpeedController motor;
 	private DigitalInput open;
 	private DigitalInput close;
-	
+
 	public GearDropper(SpeedController motor, DigitalInput open, DigitalInput close) {
-		this.open=open;
-		this.close=close;
-		this.motor=motor;
+		this.open = open;
+		this.close = close;
+		this.motor = motor;
 	}
 
 	@Override
@@ -43,4 +43,3 @@ public class GearDropper extends LimitedSubsystem{
 		motor.set(speed);
 	}
 }
-
