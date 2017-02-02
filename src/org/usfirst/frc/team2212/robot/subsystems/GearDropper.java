@@ -13,23 +13,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearDropper extends LimitedSubsystem{
 	
 	private SpeedController motor;
-	private DigitalInput max;
-	private DigitalInput min;
+	private DigitalInput open;
+	private DigitalInput close;
 	
-	public GearDropper(SpeedController motor, DigitalInput max, DigitalInput min) {
-		this.max=max;
-		this.min=min;
+	public GearDropper(SpeedController motor, DigitalInput open, DigitalInput close) {
+		this.open=open;
+		this.close=close;
 		this.motor=motor;
 	}
 
 	@Override
 	public boolean isMin() {
-		return min.get();
+		return close.get();
 	}
 
 	@Override
 	public boolean isMax() {
-		return max.get();
+		return open.get();
 	}
 
 	@Override
