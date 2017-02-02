@@ -5,6 +5,7 @@ import com.spikes2212.genericsubsystems.LimitedSubsystem;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,13 +13,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends LimitedSubsystem {
 
-	SpeedController motor;
-	Encoder encoder;
-	
-	public Shooter(SpeedController motor, Encoder encoder) {
-		this.encoder=encoder;
-		this.motor=motor;
+	private TalonSRX motor;
+	private Encoder encoder;
+
+	public Shooter(TalonSRX motor, Encoder encoder) {
+		this.encoder = encoder;
+		this.motor = motor;
 	}
+
 	@Override
 	public boolean isMin() {
 		return false;
@@ -39,4 +41,3 @@ public class Shooter extends LimitedSubsystem {
 		motor.set(speed);
 	}
 }
-
