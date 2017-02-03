@@ -9,15 +9,12 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class ImageProssecingConstants {
-	public static final Supplier<String> TABLE_NAME = ConstantHandler.addConstantString("OrienteToTwoObjects-tableName",
-			"ImageProcessing");
-	public static final Supplier<Integer> CAMERA_WIDTH = () -> 0;
-	public static final NetworkTable NETWORK_TABLE = NetworkTable.getTable(TABLE_NAME.get());
-	public static Supplier<Double> GEARS_SET_POINT = () -> ((ImageProssecingConstants.NETWORK_TABLE.getNumber("x0", 0)
-			+ 0.5 * ImageProssecingConstants.NETWORK_TABLE.getNumber("width0", 0)
-			+ (ImageProssecingConstants.NETWORK_TABLE.getNumber("x1", 0)
-					+ 0.5 * ImageProssecingConstants.NETWORK_TABLE.getNumber("width1", 0))
-					/ (2 * ImageProssecingConstants.CAMERA_WIDTH.get()))
+	public static NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
+	public static final Supplier<Integer> CAMERA_WIDTH = ConstantHandler.addConstantInt("CAMERA_WIDTH", 640);
+	public static Supplier<Double> GEARS_SET_POINT = () -> ((NETWORK_TABLE.getNumber("x0", 0)
+			+ 0.5 * NETWORK_TABLE.getNumber("width0", 0)
+			+ (NETWORK_TABLE.getNumber("x1", 0) + 0.5 * NETWORK_TABLE.getNumber("width1", 0))
+					/ (2 * CAMERA_WIDTH.get()))
 			- 0.5);
 	public static Supplier<Double> tolerance = ConstantHandler.addConstantDouble("Tolerance", 0);
 	public static PIDSource leftSource = new PIDSource() {
