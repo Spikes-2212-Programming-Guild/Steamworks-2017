@@ -26,7 +26,7 @@ public class Drivetrain extends TankDrivetrain {
 
 	@Override
 	public void setRight(double speedRight) {
-		rightDoubleSpeedcontroller.set(speedRight);
+		rightDoubleSpeedcontroller.set(-speedRight);
 	}
 
 	@Override
