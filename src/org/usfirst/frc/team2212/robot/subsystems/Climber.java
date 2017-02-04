@@ -1,31 +1,35 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import com.ctre.CANTalon;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Climber extends LimitedSubsystem {
-	private SpeedController motor;
+	private CANTalon motor;
+	public static final double MAX_CURRENT = 25;
 
-	public Climber(SpeedController motor) {
+	public Climber(CANTalon motor) {
 		this.motor = motor;
 	}
 
 	@Override
 	public boolean isMin() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method sub
 		return false;
+	}
+
+	public double getCurrent() {
+		return motor.getOutputCurrent();
 	}
 
 	@Override
 	public boolean isMax() {
-		// TODO Check how to get the isMax and write it here
-		return false;
+		if (motor.getOutputCurrent() >= MAX_CURRENT) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
