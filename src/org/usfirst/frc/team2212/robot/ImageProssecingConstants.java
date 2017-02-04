@@ -11,12 +11,11 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class ImageProssecingConstants {
 	public static NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
 	public static final Supplier<Integer> CAMERA_WIDTH = ConstantHandler.addConstantInt("CAMERA_WIDTH", 640);
-	public static Supplier<Double> GEARS_SET_POINT = () -> ((NETWORK_TABLE.getNumber("x0", 0)
-			+ 0.5 * NETWORK_TABLE.getNumber("width0", 0)
-			+ (NETWORK_TABLE.getNumber("x1", 0) + 0.5 * NETWORK_TABLE.getNumber("width1", 0))
-					/ (2 * CAMERA_WIDTH.get()))
-			- 0.5);
-	public static Supplier<Double> tolerance = ConstantHandler.addConstantDouble("Tolerance", 0);
+	public static final Supplier<Double> BIG_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x0", 0)
+			+ 0.5 * NETWORK_TABLE.getNumber("width0", 0)) / CAMERA_WIDTH.get() - 0.5);
+	public static final Supplier<Double> SMALL_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x1", 0)
+			+ 0.5 * NETWORK_TABLE.getNumber("width1", 0)) / CAMERA_WIDTH.get() - 0.5);
+	public static Supplier<Double> TWO_OBJECTS_CENTER = () -> (BIG_OBJECT_CENTER.get() + SMALL_OBJECT_CENTER.get()) / 2;
 	public static PIDSource leftSource = new PIDSource() {
 
 		@Override
@@ -25,7 +24,7 @@ public class ImageProssecingConstants {
 
 		@Override
 		public double pidGet() {
-			return -GEARS_SET_POINT.get();
+			return TWO_OBJECTS_CENTER.get();
 		}
 
 		@Override
@@ -41,7 +40,7 @@ public class ImageProssecingConstants {
 
 		@Override
 		public double pidGet() {
-			return GEARS_SET_POINT.get();
+			return TWO_OBJECTS_CENTER.get();
 		}
 
 		@Override
@@ -49,4 +48,5 @@ public class ImageProssecingConstants {
 			return PIDSourceType.kDisplacement;
 		}
 	};
+	
 }
