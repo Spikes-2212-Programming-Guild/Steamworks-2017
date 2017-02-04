@@ -3,7 +3,6 @@ package org.usfirst.frc.team2212.robot.commands;
 import java.util.function.Supplier;
 
 import org.usfirst.frc.team2212.robot.subsystems.Shooter;
-import org.usfirst.frc.team2212.robot.utils.PIDOutputForSpeed;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
