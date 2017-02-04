@@ -1,16 +1,20 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import java.util.function.Supplier;
+
 import com.ctre.CANTalon;
+import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
 
 public class Climber extends LimitedSubsystem {
-	private CANTalon motor;
-	public static final double MAX_CURRENT = 25;
+	private CANTalon motor1, motor2;
+	public static final Supplier<Double> MAX_CURRENT = ConstantHandler.addConstantDouble("Climber-MAX_CURRENT", 20);
 
-	public Climber(CANTalon motor) {
-		this.motor = motor;
+	public Climber(CANTalon motor1, CANTalon motor2) {
+		this.motor1 = motor1;
+		this.motor2 = motor2;
 	}
 
 	@Override
@@ -19,13 +23,21 @@ public class Climber extends LimitedSubsystem {
 		return false;
 	}
 
-	public double getCurrent() {
-		return motor.getOutputCurrent();
+	public double getCurrent1() {
+		if (motor1 != null)
+			return motor1.getOutputCurrent();
+		return 0;
+	}
+
+	public double getCurrent2() {
+		if (motor2 != null)
+			return motor2.getOutputCurrent();
+		return 0;
 	}
 
 	@Override
 	public boolean isMax() {
-		if (motor.getOutputCurrent() >= MAX_CURRENT) {
+		if (Math.max(motor1.getOutputCurrent(), motor2.getOutputCurrent()) >= MAX_CURRENT.get()) {
 			return true;
 		} else {
 			return false;
@@ -40,6 +52,7 @@ public class Climber extends LimitedSubsystem {
 
 	@Override
 	protected void move(double speed) {
-		motor.set(speed);
+		motor1.set(speed);
+		motor2.set(speed);
 	}
 }

@@ -4,6 +4,7 @@ package org.usfirst.frc.team2212.robot;
 import org.usfirst.frc.team2212.robot.subsystems.Climber;
 
 import com.ctre.CANTalon;
+import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static Climber climber;
+	public static DashBoardController dbc = new DashBoardController();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -29,9 +31,9 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
-		climber = new Climber(new CANTalon(0));
-		SmartDashboard.putData("climb", new MoveLimitedSubsystem(climber, 0.2));
-		SmartDashboard.putNumber("climber current", climber.getCurrent());
+		climber = new Climber(new CANTalon(3), new CANTalon(1));
+		SmartDashboard.putData("climb", new MoveLimitedSubsystem(climber, 0.5));
+		dbc.addDouble("Current", climber::getCurrent1);
 		// chooser.addObject("My Auto", new MyAutoCommand());
 	}
 
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
@@ -90,6 +93,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
