@@ -14,7 +14,7 @@ public class OrienteToGear extends CommandGroup {
 	public OrienteToGear(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
 		addSequential(new OrienteToTwoObjects(rotateSpeedSupplier));
 		addSequential(new DriveTankWithPID(Robot.drivetrain, ImageProssecingConstants.leftSource,
-				ImageProssecingConstants.rightSource, ImageProssecingConstants.GEARS_SET_POINT.get(),
-				ImageProssecingConstants.GEARS_SET_POINT.get(), KP, KI, KD, tolerance));
+				ImageProssecingConstants.rightSource,0,
+				0, KP, KI, KD, tolerance));
 	}
 }
