@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivetrain extends TankDrivetrain {
-	public static double DISTANCE_PER_PULSE=1;//FIXME get the real number
+	
 	private SpeedController leftSpeedcontroller;
 	private SpeedController rightSpeedcontroller;
 	private Encoder leftEncoder;
@@ -24,8 +24,8 @@ public class Drivetrain extends TankDrivetrain {
 		this.rightSpeedcontroller = rightSpeedcontroller;
 		this.leftEncoder=leftEncoder;
 		this.rightEncoder=rightEncoder;
-		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+		leftEncoder.setDistancePerPulse(Constants.Speed.DISTANCE_PER_PULSE);
+		rightEncoder.setDistancePerPulse(Constants.Speed.DISTANCE_PER_PULSE);
 	}
 
 	@Override
