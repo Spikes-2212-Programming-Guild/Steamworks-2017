@@ -29,7 +29,7 @@ public class ballBlocker extends LimitedSubsystem {
 
 	@Override
 	public boolean isMax() {
-		return down.get();
+		return up.get();
 	}
 
 	@Override
