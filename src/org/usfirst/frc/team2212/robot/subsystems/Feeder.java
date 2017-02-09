@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.SpeedController;
  */
 public class Feeder extends LimitedSubsystem {
 
-   private SpeedController motor;
-   
-   public Feeder(SpeedController motor){
-	   this.motor=motor;
-   }
-	
+	private SpeedController motor;
+
+	public Feeder(SpeedController motor) {
+		this.motor = motor;
+	}
+
 	@Override
 	public boolean isMin() {
 		return false;
@@ -36,4 +36,3 @@ public class Feeder extends LimitedSubsystem {
 		motor.set(speed);
 	}
 }
-
