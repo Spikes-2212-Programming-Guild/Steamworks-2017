@@ -9,8 +9,6 @@ import com.spikes2212.dashboard.ConstantHandler;
 public class ShootByDistance extends ShootBySpeed {
 	public static final double SHOOTING_ANGLE = 20; // FIXME find the real number
 	public static final double BOILER_HEIGHT = 2.74; // meter FIXME find the real number
-	public static final double WHEEL_DIAMETER = 4; // inches FIXME find the real number
-	public static final int ENCODER_TICKS = 1440; // FIXME find the real number
 
 	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
 		super(shooter, () -> calculateSpeedByDistance(distance.get()), KP, KI, KD);
@@ -35,11 +33,10 @@ public class ShootByDistance extends ShootBySpeed {
 		 * shootingAngle )- boilerHeight)))
 		 */
 		double angleInRadians = Math.toRadians(SHOOTING_ANGLE);
-		double meterToTicks = ENCODER_TICKS / (0.0254 * Math.PI * WHEEL_DIAMETER);
 		
 		double speedInMeter = Math.sqrt(4.9 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
 				/ (distance * Math.tan(angleInRadians) - BOILER_HEIGHT));
-		return speedInMeter * meterToTicks;
+		return speedInMeter;
 	}
 
 }
