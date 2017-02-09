@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-public class ImageProssecingConstants {
+public class ImageProcessingConstants {
 	public static NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
 	public static final Supplier<Integer> CAMERA_WIDTH = ConstantHandler.addConstantInt("CAMERA_WIDTH", 640);
 	public static final Supplier<Double> BIG_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x0", 0)
@@ -48,5 +48,5 @@ public class ImageProssecingConstants {
 			return PIDSourceType.kDisplacement;
 		}
 	};
-	
+
 }
