@@ -6,7 +6,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
+import org.usfirst.frc.team2212.robot.subsystems.Climber;
 import org.usfirst.frc.team2212.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2212.robot.subsystems.Feeder;
+import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
+import org.usfirst.frc.team2212.robot.subsystems.Picker;
+import org.usfirst.frc.team2212.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,9 +28,17 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static Climber climber;
+	public static BallBlocker ballBlocker;
+	public static Feeder feeder;
+	public static Picker picker;
+	public static Shooter shooter;
+	public static GearDropper gearDropper;
+	
 
     Command autonomousCommand;
     SendableChooser chooser;
+   
 
     /**
      * This function is run when the robot is first started up and should be
