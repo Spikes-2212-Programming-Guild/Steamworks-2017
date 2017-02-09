@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends TankDrivetrain {
 	
+	public static final double DISTANCE_PER_PULSE=1;
 	private SpeedController leftSpeedcontroller;
 	private SpeedController rightSpeedcontroller;
 	private Encoder leftEncoder;
