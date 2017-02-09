@@ -20,10 +20,10 @@ public class Shooter extends LimitedSubsystem {
 	private double speed;
 
 	public Shooter(VictorSP motor, Encoder encoder) {
-		this.encoder = encoder;
-		this.motor = motor;
 		encoder.setPIDSourceType(PIDSourceType.kRate);
 		encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+		this.encoder = encoder;
+		this.motor = motor;
 		speed = 0;
 	}
 
