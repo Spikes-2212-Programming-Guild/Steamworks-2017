@@ -30,11 +30,4 @@ public class ShootBySpeed extends MoveLimitedSubsystemWithPID {
 	protected boolean isFinished() {
 		return false;
 	}
-
-	// Called once after isFinished returns true
-	@Override
-	protected void end() {
-		super.end();
-		shooter.stop();
-	}
 }
