@@ -35,6 +35,6 @@ public class ShootBySpeed extends MoveLimitedSubsystemWithPID {
 	@Override
 	protected void end() {
 		super.end();
-		shooter.stopShooting();
+		shooter.stop();
 	}
 }

@@ -49,8 +49,8 @@ public class Shooter extends LimitedSubsystem {
 		speed += additionalSpeed * acceleration.get();
 		motor.set(speed);
 	}
-
-	public void stopShooting() {
+	@Override
+	public void stop() {
 		motor.set(0);
 	}
 }
