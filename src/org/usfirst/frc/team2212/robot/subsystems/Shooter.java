@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  */
 public class Shooter extends LimitedSubsystem {
 	
-	final public Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter - acceleration", 0.01);
+	final public static Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
 	private CANTalon motor;
 	private Encoder encoder;
 	public static final double DISTANCE_PER_PULSE = 1; // TODO check the real
