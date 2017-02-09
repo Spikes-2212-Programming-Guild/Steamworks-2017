@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
 import org.usfirst.frc.team2212.robot.subsystems.Climber;
+import org.usfirst.frc.team2212.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2212.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2212.robot.subsystems.Feeder;
 import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Picker picker;
 	public static Shooter shooter;
 	public static GearDropper gearDropper;
+	public static Drivetrain drivetrain;
 	
 
     Command autonomousCommand;
