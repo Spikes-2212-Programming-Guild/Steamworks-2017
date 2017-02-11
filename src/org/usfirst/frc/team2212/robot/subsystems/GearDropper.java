@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import org.usfirst.frc.team2212.robot.Robot;
+
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -24,12 +26,12 @@ public class GearDropper extends LimitedSubsystem {
 
 	@Override
 	public boolean isMin() {
-		return close.get();
+		return !close.get();
 	}
 
 	@Override
 	public boolean isMax() {
-		return open.get();
+		return !open.get();
 	}
 
 	@Override
