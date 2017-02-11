@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends TankDrivetrain {
 	public static final Supplier<Double> leftAcceleration = ConstantHandler
-			.addConstantDouble("Drivetrain-left-acceleration", 0.01);
+			.addConstantDouble("Drivetrain-leftAcceleration", 0.01);
 	public static final Supplier<Double> rightAcceleration = ConstantHandler
-			.addConstantDouble("Drivetrain-right-acceleration", 0.01);
+			.addConstantDouble("Drivetrain-rightAcceleration", 0.01);
 
 	public static final double DISTANCE_PER_PULSE = 1;
 	public static final double MAX_SPEED = 1; // FIXME get the real number
