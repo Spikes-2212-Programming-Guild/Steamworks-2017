@@ -19,6 +19,7 @@ import org.usfirst.frc.team2212.robot.subsystems.Picker;
 import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon;
+import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static GearDropper gearDropper;
 	public static Drivetrain drivetrain;
+	public static DashBoardController dbc = new DashBoardController();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -77,6 +79,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
@@ -106,6 +109,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		dbc.update();
 		Scheduler.getInstance().run();
 	}
 
@@ -121,6 +125,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
