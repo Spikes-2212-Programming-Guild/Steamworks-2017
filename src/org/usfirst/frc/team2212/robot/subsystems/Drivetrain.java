@@ -22,6 +22,13 @@ public class Drivetrain extends TankDrivetrain {
 	public static final Supplier<Double> rightAcceleration = ConstantHandler
 			.addConstantDouble("Drivetrain-rightAcceleration", 0.01);
 
+	public static final Supplier<Double> leftKP = ConstantHandler.addConstantDouble("Drivetrain-leftKP", 1);
+	public static final Supplier<Double> leftKI = ConstantHandler.addConstantDouble("Drivetrain-leftKI", 1);
+	public static final Supplier<Double> leftKD = ConstantHandler.addConstantDouble("Drivetrain-leftKD", 1);
+	public static final Supplier<Double> rightKP = ConstantHandler.addConstantDouble("Drivetrain-rightKP", 1);
+	public static final Supplier<Double> rightKI = ConstantHandler.addConstantDouble("Drivetrain-rightKI", 1);
+	public static final Supplier<Double> rightKD = ConstantHandler.addConstantDouble("Drivetrain-rightKD", 1);
+
 	public static final double DISTANCE_PER_PULSE = 1;
 	public static final double MAX_SPEED = 1; // FIXME get the real number
 	private SpeedController leftSpeedcontroller;
@@ -34,8 +41,7 @@ public class Drivetrain extends TankDrivetrain {
 	private double rightSpeed;
 
 	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller, Encoder leftEncoder,
-			Encoder rightEncoder, double leftKP, double leftKI, double leftKD, double rightKP, double rightKI,
-			double rightKD) {
+			Encoder rightEncoder) {
 		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		leftEncoder.setPIDSourceType(PIDSourceType.kRate);
@@ -47,9 +53,9 @@ public class Drivetrain extends TankDrivetrain {
 		leftSpeed = 0;
 		rightSpeed = 0;
 
-		leftMovmentControl = new PIDController(leftKP, leftKI, leftKD, leftEncoder,
+		leftMovmentControl = new PIDController(leftKP.get(), leftKI.get(), leftKD.get(), leftEncoder,
 				(double output) -> leftSpeed += output * leftAcceleration.get());
-		rightMovmentControl = new PIDController(rightKP, rightKI, rightKD, rightEncoder,
+		rightMovmentControl = new PIDController(rightKP.get(), rightKI.get(), rightKD.get(), rightEncoder,
 				(double output) -> rightSpeed += output * rightAcceleration.get());
 
 		leftMovmentControl.setAbsoluteTolerance(0);
@@ -61,7 +67,7 @@ public class Drivetrain extends TankDrivetrain {
 	@Override
 	public void setLeft(double speedLeft) {
 		leftMovmentControl.setSetpoint(MAX_SPEED * speedLeft);
-		if(!leftMovmentControl.isEnabled())
+		if (!leftMovmentControl.isEnabled())
 			leftMovmentControl.enable();
 		leftSpeedcontroller.set(leftSpeed);
 	}
@@ -69,7 +75,7 @@ public class Drivetrain extends TankDrivetrain {
 	@Override
 	public void setRight(double speedRight) {
 		rightMovmentControl.setSetpoint(MAX_SPEED * speedRight);
-		if(!rightMovmentControl.isEnabled())
+		if (!rightMovmentControl.isEnabled())
 			rightMovmentControl.enable();
 		rightSpeedcontroller.set(rightSpeed);
 	}
@@ -87,7 +93,7 @@ public class Drivetrain extends TankDrivetrain {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
