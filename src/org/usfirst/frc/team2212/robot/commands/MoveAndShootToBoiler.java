@@ -21,7 +21,7 @@ public class MoveAndShootToBoiler extends CommandGroup {
 		Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingTime", 4);
 		
 		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
-		addSequential(new OrientateToBoiler(turningSpeed));
+		addSequential(new OrientToBoiler(turningSpeed));
 		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingToBoilerTime.get());
 		addSequential(new ShootToBoiler());
     }
