@@ -9,9 +9,9 @@ import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTankWithPID;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class OrienteToTwoTargets extends CommandGroup {
+public class OrientToTwoTargets extends CommandGroup {
 
-	public OrienteToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
+	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
 		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
 		addSequential(new DriveTankWithPID(Robot.drivetrain, ImageProcessingConstants.leftSource,
 				ImageProcessingConstants.rightSource, 0, 0, KP, KI, KD, tolerance));
