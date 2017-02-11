@@ -37,8 +37,6 @@ public class Drivetrain extends TankDrivetrain {
 	private Encoder rightEncoder;
 	private PIDController leftMovmentControl;
 	private PIDController rightMovmentControl;
-	private double leftSpeed;
-	private double rightSpeed;
 
 	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller, Encoder leftEncoder,
 			Encoder rightEncoder) {
@@ -50,13 +48,13 @@ public class Drivetrain extends TankDrivetrain {
 		this.rightSpeedcontroller = rightSpeedcontroller;
 		this.leftEncoder = leftEncoder;
 		this.rightEncoder = rightEncoder;
-		leftSpeed = 0;
-		rightSpeed = 0;
 
 		leftMovmentControl = new PIDController(leftKP.get(), leftKI.get(), leftKD.get(), leftEncoder,
-				(double output) -> leftSpeed += output * leftAcceleration.get());
+				(double output) -> leftSpeedcontroller
+						.set(leftSpeedcontroller.get() + output * leftAcceleration.get()));
 		rightMovmentControl = new PIDController(rightKP.get(), rightKI.get(), rightKD.get(), rightEncoder,
-				(double output) -> rightSpeed += output * rightAcceleration.get());
+				(double output) -> rightSpeedcontroller
+				.set(rightSpeedcontroller.get() + output * rightAcceleration.get()));
 
 		leftMovmentControl.setAbsoluteTolerance(0);
 		leftMovmentControl.setOutputRange(-1, 1);
@@ -69,7 +67,6 @@ public class Drivetrain extends TankDrivetrain {
 		leftMovmentControl.setSetpoint(MAX_SPEED * speedLeft);
 		if (!leftMovmentControl.isEnabled())
 			leftMovmentControl.enable();
-		leftSpeedcontroller.set(leftSpeed);
 	}
 
 	@Override
@@ -77,7 +74,6 @@ public class Drivetrain extends TankDrivetrain {
 		rightMovmentControl.setSetpoint(MAX_SPEED * speedRight);
 		if (!rightMovmentControl.isEnabled())
 			rightMovmentControl.enable();
-		rightSpeedcontroller.set(rightSpeed);
 	}
 
 	@Override
