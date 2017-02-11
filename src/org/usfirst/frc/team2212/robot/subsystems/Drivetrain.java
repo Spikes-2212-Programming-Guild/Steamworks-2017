@@ -83,16 +83,6 @@ public class Drivetrain extends TankDrivetrain {
 	}
 
 	@Override
-	public void stop() {
-		rightMovmentControl.disable();
-		leftMovmentControl.disable();
-		leftSpeedcontroller.set(0);
-		rightSpeedcontroller.set(0);
-		leftSpeed = 0;
-		rightSpeed = 0;
-	}
-
-	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 		
