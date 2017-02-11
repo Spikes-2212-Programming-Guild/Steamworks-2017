@@ -21,13 +21,17 @@ public class RobotMap {
 
 	public interface PWM {
 		public static final int PICKER = 0;
-		public static final int GEAR_DROPPER = 1;//Cable tag: Gears
+		public static final int GEAR_DROPPER = 1;// Cable tag: Gears
 		public static final int BALL_BLOCKER = 2;
 		public static final int FEEDER = 3;
-		public static final int BLENDER = 4;//This is also part of the feeder
+		public static final int BLENDER = 4;// This is also part of the feeder
 	}
 
 	public interface DIO {
+		public static final int GEAR_DROPPER_OPEN = 0;
+		public static final int GEAR_DROPPER_CLOSED = 1;
+		public static final int BALL_BLOCKER_OPEN = 8;
+		public static final int BALL_BLOCKER_CLOSED = 9;
 	}
 
 	public interface AnalogInput {
