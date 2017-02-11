@@ -61,14 +61,16 @@ public class Drivetrain extends TankDrivetrain {
 	@Override
 	public void setLeft(double speedLeft) {
 		leftMovmentControl.setSetpoint(MAX_SPEED * speedLeft);
-		leftMovmentControl.enable();
+		if(!leftMovmentControl.isEnabled())
+			leftMovmentControl.enable();
 		leftSpeedcontroller.set(leftSpeed);
 	}
 
 	@Override
 	public void setRight(double speedRight) {
 		rightMovmentControl.setSetpoint(MAX_SPEED * speedRight);
-		rightMovmentControl.enable();
+		if(!rightMovmentControl.isEnabled())
+			rightMovmentControl.enable();
 		rightSpeedcontroller.set(rightSpeed);
 	}
 
