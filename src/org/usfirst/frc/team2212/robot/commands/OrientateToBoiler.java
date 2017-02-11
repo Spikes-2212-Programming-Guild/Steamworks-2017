@@ -2,41 +2,20 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
+import com.spikes2212.dashboard.ConstantHandler;
+import com.spikes2212.utils.RunnableCommand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team2212.robot.ImageProcessingConstants;
 
 /**
  *
  */
-public class OrientateToBoiler extends Command {
+public class OrientateToBoiler extends CommandGroup {
+    public static final Supplier<Double> CAMERA_ID = ConstantHandler.addConstantDouble("OrientateToBoiler-CAMERA_ID", 0);
 
     public OrientateToBoiler(Supplier<Double> turningSpeed) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
-    
-    public OrientateToBoiler(double turningSpeed) {
-       this(()-> turningSpeed);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
+        addSequential(new RunnableCommand(() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera", CAMERA_ID.get())));
+        addSequential(new OrientToTwoTargets(turningSpeed, OrientToGear.KP.get(), OrientToGear.KI.get(), OrientToGear.KD.get(), OrientToGear.TOLERANCE.get()));
     }
 }
