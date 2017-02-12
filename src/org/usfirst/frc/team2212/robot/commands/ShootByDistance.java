@@ -2,13 +2,10 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
+import org.usfirst.frc.team2212.robot.Constants;
 import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 
-import com.spikes2212.dashboard.ConstantHandler;
-
 public class ShootByDistance extends ShootBySpeed {
-	public static final double SHOOTING_ANGLE = 20; // FIXME find the real number
-	public static final double BOILER_HEIGHT = 2.74; // meter FIXME find the real number
 
 	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
 		super(shooter, () -> calculateSpeedByDistance(distance.get()), KP, KI, KD);
@@ -32,10 +29,10 @@ public class ShootByDistance extends ShootBySpeed {
 		 * speed=root(5*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle )- boilerHeight)))
 		 */
-		double angleInRadians = Math.toRadians(SHOOTING_ANGLE);
-		
+		double angleInRadians = Math.toRadians(Shooter.SHOOTING_ANGLE);
+
 		double speedInMeter = Math.sqrt(4.9 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
-				/ (distance * Math.tan(angleInRadians) - BOILER_HEIGHT));
+				/ (distance * Math.tan(angleInRadians) - Constants.BOILER_HEIGHT));
 		return speedInMeter;
 	}
 
