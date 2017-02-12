@@ -2,7 +2,11 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
+import org.usfirst.frc.team2212.robot.Robot;
+import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
+
 import com.spikes2212.dashboard.ConstantHandler;
+import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.TankDrivetrain;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
 
@@ -25,7 +29,7 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
     	
         addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
         addSequential(new OrientToGear(turnToGearSpeed));
-        addSequential(new DropGear());
+        addSequential(new MoveLimitedSubsystem(Robot.gearDropper,GearDropper.OPEN_SPEED));
         
         addSequential(new DriveTank(drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
         addSequential(new OrientToBoiler(turnToBoilerSpeed));
