@@ -24,11 +24,11 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
     	Supplier<Double> moveToBoilerTime = ConstantHandler.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-moveToBoilerTime", 3);
     	
         addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
-        addSequential(new OrienateToGear(turnToGearSpeed));
+        addSequential(new OrientToGear(turnToGearSpeed));
         addSequential(new DropGear());
         
         addSequential(new DriveTank(drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
-        addSequential(new OrientateToBoiler(turnToBoilerSpeed));
+        addSequential(new OrientToBoiler(turnToBoilerSpeed));
         addSequential(new ShootToBoiler());
     }
 }

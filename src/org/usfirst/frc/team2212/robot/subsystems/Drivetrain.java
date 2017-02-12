@@ -12,20 +12,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivetrain extends TankDrivetrain {
-	
+
+	public static final double DISTANCE_PER_PULSE = 1;
 	private SpeedController leftSpeedcontroller;
 	private SpeedController rightSpeedcontroller;
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
 
-	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller,
-			Encoder leftEncoder, Encoder rightEncoder) {
+	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller, Encoder leftEncoder,
+			Encoder rightEncoder) {
 		this.leftSpeedcontroller = leftSpeedcontroller;
 		this.rightSpeedcontroller = rightSpeedcontroller;
-		this.leftEncoder=leftEncoder;
-		this.rightEncoder=rightEncoder;
-		leftEncoder.setDistancePerPulse(Constants.Speed.DISTANCE_PER_PULSE);
-		rightEncoder.setDistancePerPulse(Constants.Speed.DISTANCE_PER_PULSE);
+		this.leftEncoder = leftEncoder;
+		this.rightEncoder = rightEncoder;
+		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+		rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 	}
 
 	@Override
@@ -38,10 +39,6 @@ public class Drivetrain extends TankDrivetrain {
 		rightSpeedcontroller.set(speedRight);
 	}
 
-	/**
-	 * I will never ever leave my leptop on
-	 * @return 
-	 */
 	@Override
 	public PIDSource getLeftPIDSource() {
 		return leftEncoder;
