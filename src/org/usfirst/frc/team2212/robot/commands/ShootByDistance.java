@@ -2,7 +2,6 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
-import org.usfirst.frc.team2212.robot.Constants;
 import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 
 public class ShootByDistance extends ShootBySpeed {
@@ -29,10 +28,10 @@ public class ShootByDistance extends ShootBySpeed {
 		 * speed=root(5*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle )- boilerHeight)))
 		 */
-		double angleInRadians = Math.toRadians(Constants.SHOOTING_ANGLE);
+		double angleInRadians = Math.toRadians(Shooter.SHOOTING_ANGLE);
 
 		double speedInMeter = Math.sqrt(4.9 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
-				/ (distance * Math.tan(angleInRadians) - Constants.BOILER_HEIGHT));
+				/ (distance * Math.tan(angleInRadians) - Shooter.BOILER_HEIGHT));
 		return speedInMeter;
 	}
 
