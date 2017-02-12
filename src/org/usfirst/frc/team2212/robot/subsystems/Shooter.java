@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  *
  */
 public class Shooter extends LimitedSubsystem {
-	
+
 	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
 	private CANTalon motor;
 	private Encoder encoder;
 	public static final double DISTANCE_PER_PULSE = 1; // TODO check the real
 														// value
+	public static final double SHOOTING_ANGLE = 20; // FIXME find the real
+													// number
 	private double speed;
 
 	public Shooter(CANTalon motor, Encoder encoder) {
@@ -49,6 +51,7 @@ public class Shooter extends LimitedSubsystem {
 		speed += additionalSpeed * acceleration.get();
 		motor.set(speed);
 	}
+
 	@Override
 	public void stop() {
 		motor.set(0);
