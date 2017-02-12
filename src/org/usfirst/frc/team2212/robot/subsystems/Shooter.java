@@ -17,10 +17,11 @@ public class Shooter extends LimitedSubsystem {
 	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
 	private CANTalon motor;
 	private Encoder encoder;
+	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 0.1);
+	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 0.1);
+	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.1);
 	public static final double DISTANCE_PER_PULSE = 1; // TODO check the real
 														// value
-	public static final double SHOOTING_ANGLE = 20; // FIXME find the real
-													// number
 	private double speed;
 
 	public Shooter(CANTalon motor, Encoder encoder) {
