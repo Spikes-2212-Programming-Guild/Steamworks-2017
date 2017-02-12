@@ -18,7 +18,7 @@ public class Shooter extends LimitedSubsystem {
 	public static final double BOILER_HEIGHT = 96.8503937; // inch FIXME find
 															// the
 	// real number
-	public static final double SHOOTING_ANGLE = 20; // FIXME find the real
+	public static final double SHOOTING_ANGLE = 80; // FIXME find the real
 	// number
 	private CANTalon motor;
 	private Encoder encoder;
