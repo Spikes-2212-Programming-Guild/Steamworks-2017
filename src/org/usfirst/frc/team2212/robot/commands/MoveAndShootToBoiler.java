@@ -22,10 +22,10 @@ public class MoveAndShootToBoiler extends CommandGroup {
 			.addConstantDouble("MoveAndShootToBoiler-turningSpeed", 0.5);
 	public static final Supplier<Double> movingToBoilerTime = ConstantHandler.addConstantDouble("MoveToBoilerTime",
 			0.5);
+	public static final Supplier<Double> movingTime = ConstantHandler
+			.addConstantDouble("MoveAndShootToBoiler-movingTime", 4);
 
 	public MoveAndShootToBoiler() {
-
-		Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingTime", 4);
 
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
 		addSequential(new OrientToBoiler(turningSpeed));
