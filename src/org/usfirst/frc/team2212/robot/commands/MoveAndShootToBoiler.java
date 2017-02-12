@@ -16,18 +16,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class MoveAndShootToBoiler extends CommandGroup {
+	public static final Supplier<Double> movingSpeed = ConstantHandler
+			.addConstantDouble("MoveAndShootToBoiler-movingSpeed", 0.5);
+	public static final Supplier<Double> turningSpeed = ConstantHandler
+			.addConstantDouble("MoveAndShootToBoiler-turningSpeed", 0.5);
+	public static final Supplier<Double> movingToBoilerTime = ConstantHandler.addConstantDouble("MoveToBoilerTime",
+			0.5);
 
-	public MoveAndShootToBoiler(TankDrivetrain drivetrain) {
+	public MoveAndShootToBoiler() {
 
-		Supplier<Double> movingSpeed = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingSpeed", 0.5);
-		Supplier<Double> turningSpeed = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-turningSpeed", 0.5);
-		Supplier<Double> movingToBoilerTime = ConstantHandler
-				.addConstantDouble("MoveAndShootToBoiler-movingToBoilerTime", 1);
 		Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveAndShootToBoiler-movingTime", 4);
 
-		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
+		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
 		addSequential(new OrientToBoiler(turningSpeed));
-		addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingToBoilerTime.get());
+		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingToBoilerTime.get());
 		addSequential(new ShootByDistance(Robot.shooter, ImageProcessingConstants.distance, Shooter.KP, Shooter.KI,
 				Shooter.KD));
 	}
