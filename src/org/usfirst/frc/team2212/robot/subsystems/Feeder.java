@@ -14,6 +14,7 @@ public class Feeder extends LimitedSubsystem {
 
 	public Feeder(SpeedController motor) {
 		this.motor = motor;
+		this.motor.setInverted(true);
 	}
 
 	@Override
