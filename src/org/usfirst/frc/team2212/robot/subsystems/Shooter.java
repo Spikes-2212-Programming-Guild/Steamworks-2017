@@ -15,6 +15,10 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class Shooter extends LimitedSubsystem {
 
 	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
+	public static final double BOILER_HEIGHT = 107.874016; // inch FIXME find the
+	// real number
+	public static final double SHOOTING_ANGLE = 20; // FIXME find the real
+	// number
 	private CANTalon motor;
 	private Encoder encoder;
 	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 0.1);
