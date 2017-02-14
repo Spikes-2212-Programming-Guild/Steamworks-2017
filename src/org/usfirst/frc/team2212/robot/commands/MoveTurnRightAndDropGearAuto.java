@@ -17,16 +17,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class MoveTurnRightAndDropGearAuto extends CommandGroup {
 
-	public static final Supplier<Double> movingSpeed = ConstantHandler
-			.addConstantDouble("MoveTurnRightAndDropGearAuto-movingSpeed", 0.5);
 	public static final Supplier<Double> turningSpeed = ConstantHandler
 			.addConstantDouble("MoveTurnRightAndDropGearAuto-turningSpeed", 0.5);
 	public static final Supplier<Double> movingTime = ConstantHandler
 			.addConstantDouble("MoveTurnRightAndDropGearAuto-movingTime", 4);
 
 	public MoveTurnRightAndDropGearAuto() {
-		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
-		addSequential(new OrientateAndMoveToGear(turningSpeed, movingSpeed));
+		addSequential(new DriveTank(Robot.drivetrain, MoveStraightAndDropGearAuto.movingSpeed, MoveStraightAndDropGearAuto.movingSpeed), movingTime.get());
+		addSequential(new OrientateAndMoveToGear(turningSpeed, MoveStraightAndDropGearAuto.movingSpeed));
 		addSequential(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
 	}
 }
