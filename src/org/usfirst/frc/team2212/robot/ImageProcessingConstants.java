@@ -11,9 +11,9 @@ public class ImageProcessingConstants {
 	public static final int CAMERA_HEIGHT = 360;
 	public static final double CAMERA_VIEW_ANGLE_Y = 32.0;
 	public static final double CAMERA_VIEW_ANGLE_X = 58.75;
-	public static final double CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
+	public static final double BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
 
-	public static final Supplier<Double> CAMERA_ANGLE_TO_FLOOR = ConstantHandler
+	public static final Supplier<Double> BOILER_CAMERA_ANGLE_TO_FLOOR = ConstantHandler
 			.addConstantDouble("CAMERA_ANGLE_TO_FLOOR", 20);
 
 	public static final NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
@@ -34,14 +34,14 @@ public class ImageProcessingConstants {
 			- NETWORK_TABLE.getNumber("y0", 0.0) - 0.5 * NETWORK_TABLE.getNumber("height0", 0);
 
 	private static final Supplier<Double> cameraViewAngleToHighBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
-			* HIGH_REFLECTIVE_HEIGHT_PX.get() + CAMERA_ANGLE_TO_FLOOR.get();
+			* HIGH_REFLECTIVE_HEIGHT_PX.get() + BOILER_CAMERA_ANGLE_TO_FLOOR.get();
 	private static final Supplier<Double> cameraViewAngleToLowBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
-			* LOW_REFLECTIVE_HEIGHT_PX.get() + CAMERA_ANGLE_TO_FLOOR.get();
+			* LOW_REFLECTIVE_HEIGHT_PX.get() + BOILER_CAMERA_ANGLE_TO_FLOOR.get();
 
 	private static final Supplier<Double> distanceHigh = () -> (HIGH_REFLECTIVE_HEIGHT_IN
-			- CAMERA_HEIGHT_FROM_FLOOR_IN) / Math.tan(Math.toRadians(cameraViewAngleToHighBoiler.get()));
+			- BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN) / Math.tan(Math.toRadians(cameraViewAngleToHighBoiler.get()));
 	private static final Supplier<Double> distanceLow = () -> (LOW_REFLECTIVE_HEIGHT_IN
-			- CAMERA_HEIGHT_FROM_FLOOR_IN)/ Math.tan(Math.toRadians(cameraViewAngleToLowBoiler.get()));
+			- BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN)/ Math.tan(Math.toRadians(cameraViewAngleToLowBoiler.get()));
 	public static final Supplier<Double> distanceToBoiler = () -> (distanceHigh.get() + distanceLow.get()) / 2;
 
 }
