@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class ImageProcessingConstants {
 	public static final int CAMERA_WIDTH = 640;
 	public static final int CAMERA_HEIGHT = 360;
-	public static final double CAMERA_ANGLE_Y = 32.0;
-	public static final double CAMERA_ANGLE_X = 58.75;
+	public static final double CAMERA_VIEW_ANGLE_Y = 32.0;
+	public static final double CAMERA_VIEW_ANGLE_X = 58.75;
 	public static final double CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
 
 	public static final Supplier<Double> CAMERA_ANGLE_TO_FLOOR = ConstantHandler
@@ -33,9 +33,9 @@ public class ImageProcessingConstants {
 	private static final Supplier<Double> HIGH_REFLECTIVE_HEIGHT_PX = () -> CAMERA_HEIGHT
 			- NETWORK_TABLE.getNumber("y0", 0.0) - 0.5 * NETWORK_TABLE.getNumber("height0", 0);
 
-	private static final Supplier<Double> cameraViewAngleToHighBoiler = () -> (CAMERA_ANGLE_Y / CAMERA_HEIGHT)
+	private static final Supplier<Double> cameraViewAngleToHighBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
 			* HIGH_REFLECTIVE_HEIGHT_PX.get() + CAMERA_ANGLE_TO_FLOOR.get();
-	private static final Supplier<Double> cameraViewAngleToLowBoiler = () -> (CAMERA_ANGLE_Y / CAMERA_HEIGHT)
+	private static final Supplier<Double> cameraViewAngleToLowBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
 			* LOW_REFLECTIVE_HEIGHT_PX.get() + CAMERA_ANGLE_TO_FLOOR.get();
 
 	private static final Supplier<Double> distanceHigh = () -> (HIGH_REFLECTIVE_HEIGHT_IN
