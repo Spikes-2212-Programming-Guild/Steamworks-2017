@@ -36,8 +36,9 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
 	public MoveDropGearMoveToBoilerAndShootAuto() {
 
-		addSequential(new MoveTurnLeftAndDropGearAuto());
+		addSequential(new MoveTurnLeftAndDropGearAuto()); //Moves Turns Left And Drops Gear
 
+		//moves to the boiler turns to it and shoots
 		addSequential(new DriveTank(Robot.drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
 		addSequential(new OrientToBoiler(turnToBoilerSpeed));
 		addSequential(new ShootByDistance(Robot.shooter, ImageProcessingConstants.distanceToBoiler, Shooter.KP.get(),
