@@ -21,16 +21,16 @@ public class ShootByDistance extends ShootBySpeed {
 		 * 
 		 * distance = t*Vx=t*speed*cos(shootingAngle)
 		 * t=distance/(speed*cos(shootingAngle)) boilerHeight =
-		 * t*Vy-g/2*t^2=t*speed*sin(shootingAngle)-g/2*t^2=
-		 * distance*tan(shootingAngle)-g/2*d^2/(speed*cos(shootingAngle))^2
+		 * t*Vy-0.5*g*t^2=t*speed*sin(shootingAngle)-0.5*g*t^2=
+		 * distance*tan(shootingAngle)-0.5*g*d^2/(speed*cos(shootingAngle))^2
 		 * 
-		 * g/2*d^2/(speed*cos(shootingAngle))^2=distance*tan(shootingAngle)-
+		 * 0.5*g*d^2/(speed*cos(shootingAngle))^2=distance*tan(shootingAngle)-
 		 * boilerHeight
 		 * 
-		 * speed^2=g/2*distance^2/(cos(shootingAngle)^2*(distance*tan(
+		 * speed^2=0.5*g*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle)- boilerHeight))
 		 * 
-		 * speed=root(g/2*distance^2/(cos(shootingAngle)^2*(distance*tan(
+		 * speed=root(0.5*g*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle )- boilerHeight)))
 		 */
 		double angleInRadians = Math.toRadians(SHOOTING_ANGLE);
