@@ -15,10 +15,10 @@ public class OrientToTwoTargets extends CommandGroup {
 
 	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
 		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
-		addSequential(new DriveTankWithPID(Robot.drivetrain, leftDistanceSource,
-				rightDistanceSource, 0, 0, KP, KI, KD, tolerance));
+		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource,
+				rightOrientationSource, 0, 0, KP, KI, KD, tolerance));
 	}
-	private static PIDSource leftDistanceSource = new PIDSource() {
+	private static PIDSource leftOrientationSource = new PIDSource() {
 
 		@Override
 		public void setPIDSourceType(PIDSourceType pidSource) {
@@ -34,7 +34,7 @@ public class OrientToTwoTargets extends CommandGroup {
 			return PIDSourceType.kDisplacement;
 		}
 	};
-	private static PIDSource rightDistanceSource = new PIDSource() {
+	private static PIDSource rightOrientationSource = new PIDSource() {
 
 		@Override
 		public void setPIDSourceType(PIDSourceType pidSource) {
