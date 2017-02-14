@@ -14,13 +14,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class OrientateAndMoveToGear extends CommandGroup {
 	
-	public static final Supplier<Double> movingSpeed = ConstantHandler
-			.addConstantDouble("OrientateAndMoveToGear-movingSpeed", 0.5);
-	public static final Supplier<Double> moveToGearTime = ConstantHandler
-			.addConstantDouble(" OrientateAndMoveToGear-moveToGearTime", 1);
-
-    public OrientateAndMoveToGear(Supplier<Double> turningSpeed) {
+    public OrientateAndMoveToGear(Supplier<Double> turningSpeed, Supplier<Double> forwardsSpeed) {
     	addSequential(new OrientToGear(turningSpeed));
-		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), moveToGearTime.get());
+		addSequential(new DriveTank(Robot.drivetrain, forwardsSpeed, forwardsSpeed));
     }
 }
