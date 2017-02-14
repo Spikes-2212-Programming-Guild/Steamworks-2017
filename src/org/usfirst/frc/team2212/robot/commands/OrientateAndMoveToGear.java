@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class OrientateAndMoveToGear extends CommandGroup {
-	
-    public OrientateAndMoveToGear(Supplier<Double> turningSpeed, Supplier<Double> forwardsSpeed) {
-    	addSequential(new OrientToGear(turningSpeed));
+
+	public OrientateAndMoveToGear(Supplier<Double> turningSpeed, Supplier<Double> forwardsSpeed) {
+		addSequential(new OrientToGear(turningSpeed));
 		addSequential(new DriveTank(Robot.drivetrain, forwardsSpeed, forwardsSpeed));
-    }
+	}
 }
