@@ -9,6 +9,7 @@ import com.spikes2212.dashboard.ConstantHandler;
 public class ShootByDistance extends ShootBySpeed {
 	public static final double SHOOTING_ANGLE = 20; // FIXME find the real number
 	public static final double BOILER_HEIGHT = 2.74; // meter FIXME find the real number
+	public static final double GRAVITY = 386.1; // in/s^2
 
 	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
 		super(shooter, () -> calculateSpeedByDistance(distance.get()), KP, KI, KD);
@@ -20,23 +21,23 @@ public class ShootByDistance extends ShootBySpeed {
 		 * 
 		 * distance = t*Vx=t*speed*cos(shootingAngle)
 		 * t=distance/(speed*cos(shootingAngle)) boilerHeight =
-		 * t*Vy-4.9t^2=t*speed*sin(shootingAngle)-4.9t^2=
-		 * distance*tan(shootingAngle)-5d^2/(speed*cos(shootingAngle))^2
+		 * t*Vy-g/2*t^2=t*speed*sin(shootingAngle)-g/2*t^2=
+		 * distance*tan(shootingAngle)-g/2*d^2/(speed*cos(shootingAngle))^2
 		 * 
-		 * 5d^2/(speed*cos(shootingAngle))^2=distance*tan(shootingAngle)-
+		 * g/2*d^2/(speed*cos(shootingAngle))^2=distance*tan(shootingAngle)-
 		 * boilerHeight
 		 * 
-		 * speed^2=5*distance^2/(cos(shootingAngle)^2*(distance*tan(
+		 * speed^2=g/2*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle)- boilerHeight))
 		 * 
-		 * speed=root(5*distance^2/(cos(shootingAngle)^2*(distance*tan(
+		 * speed=root(g/2*distance^2/(cos(shootingAngle)^2*(distance*tan(
 		 * shootingAngle )- boilerHeight)))
 		 */
 		double angleInRadians = Math.toRadians(SHOOTING_ANGLE);
 		
-		double speedInMeter = Math.sqrt(4.9 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
+		double speed = Math.sqrt(GRAVITY/2 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
 				/ (distance * Math.tan(angleInRadians) - BOILER_HEIGHT));
-		return speedInMeter;
+		return speed;
 	}
 
 }
