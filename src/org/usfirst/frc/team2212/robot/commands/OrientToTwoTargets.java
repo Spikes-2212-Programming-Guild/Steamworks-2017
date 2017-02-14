@@ -12,7 +12,13 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class OrientToTwoTargets extends CommandGroup {
-	public static PIDSource leftSource = new PIDSource() {
+
+	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
+		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
+		addSequential(new DriveTankWithPID(Robot.drivetrain, leftDistanceSource,
+				rightDistanceSource, 0, 0, KP, KI, KD, tolerance));
+	}
+	private static PIDSource leftDistanceSource = new PIDSource() {
 
 		@Override
 		public void setPIDSourceType(PIDSourceType pidSource) {
@@ -28,7 +34,7 @@ public class OrientToTwoTargets extends CommandGroup {
 			return PIDSourceType.kDisplacement;
 		}
 	};
-	public static PIDSource rightSource = new PIDSource() {
+	private static PIDSource rightDistanceSource = new PIDSource() {
 
 		@Override
 		public void setPIDSourceType(PIDSourceType pidSource) {
@@ -44,10 +50,4 @@ public class OrientToTwoTargets extends CommandGroup {
 			return PIDSourceType.kDisplacement;
 		}
 	};
-
-	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
-		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
-		addSequential(new DriveTankWithPID(Robot.drivetrain, leftSource,
-				rightSource, 0, 0, KP, KI, KD, tolerance));
-	}
 }
