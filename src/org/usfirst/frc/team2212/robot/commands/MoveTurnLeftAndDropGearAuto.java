@@ -21,8 +21,6 @@ public class MoveTurnLeftAndDropGearAuto extends CommandGroup {
 			.addConstantDouble("MoveTurnLeftAndDropGearAuto-movingSpeed", 0.5);
 	public static final Supplier<Double> turningSpeed = ConstantHandler
 			.addConstantDouble("MoveTurnLeftAndDropGearAuto-turningSpeed", -0.5);
-	public static final Supplier<Double> moveToGearTime = ConstantHandler
-			.addConstantDouble("MoveTurnLeftAndDropGearAuto-moveToGearTime", 1);
 	public static final Supplier<Double> movingTime = ConstantHandler
 			.addConstantDouble("MoveTurnLeftAndDropGearAuto-movingTime", 4);
 
