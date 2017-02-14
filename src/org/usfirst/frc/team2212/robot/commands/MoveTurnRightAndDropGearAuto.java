@@ -21,15 +21,12 @@ public class MoveTurnRightAndDropGearAuto extends CommandGroup {
 			.addConstantDouble("MoveTurnRightAndDropGearAuto-movingSpeed", 0.5);
 	public static final Supplier<Double> turningSpeed = ConstantHandler
 			.addConstantDouble("MoveTurnRightAndDropGearAuto-turningSpeed", 0.5);
-	public static final Supplier<Double> moveToGearTime = ConstantHandler
-			.addConstantDouble("MoveTurnRightAndDropGearAuto-moveToGearTime", 1);
 	public static final Supplier<Double> movingTime = ConstantHandler
 			.addConstantDouble("MoveTurnRightAndDropGearAuto-movingTime", 4);
 
 	public MoveTurnRightAndDropGearAuto() {
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
-		addSequential(new OrientToGear(turningSpeed));
-		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), moveToGearTime.get());
+		addSequential(new OrientateAndMoveToGear(turningSpeed));
 		addSequential(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
 	}
 }
