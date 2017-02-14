@@ -26,7 +26,7 @@ public class MoveTurnLeftAndDropGearAuto extends CommandGroup {
 
 	public MoveTurnLeftAndDropGearAuto() {
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
-		addSequential(new OrientateAndMoveToGear(turningSpeed));
+		addSequential(new OrientateAndMoveToGear(turningSpeed, movingSpeed));
 		addSequential(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
 	}
 }
