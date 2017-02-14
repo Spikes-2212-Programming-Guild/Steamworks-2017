@@ -8,7 +8,7 @@ import com.spikes2212.dashboard.ConstantHandler;
 
 public class ShootByDistance extends ShootBySpeed {
 	public static final double SHOOTING_ANGLE = 20; // FIXME find the real number
-	public static final double BOILER_HEIGHT = 2.74; // meter FIXME find the real number
+	public static final double BOILER_HEIGHT = 97; // 8 ft. 1 in. 
 	public static final double GRAVITY = 386.1; // in/s^2
 
 	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
