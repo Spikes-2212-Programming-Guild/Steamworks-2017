@@ -4,49 +4,44 @@ import java.util.function.Supplier;
 
 import com.spikes2212.dashboard.ConstantHandler;
 
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class ImageProcessingConstants {
-	public static NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
-	public static final Supplier<Integer> CAMERA_WIDTH = ConstantHandler.addConstantInt("CAMERA_WIDTH", 640);
+	public static final int CAMERA_WIDTH = 640;
+	public static final int CAMERA_HEIGHT = 360;
+	public static final double CAMERA_VIEW_ANGLE_Y = 32.0;
+	public static final double CAMERA_VIEW_ANGLE_X = 58.75;
+	public static final double BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
+
+	public static final Supplier<Double> BOILER_CAMERA_ANGLE_TO_FLOOR = ConstantHandler
+			.addConstantDouble("CAMERA_ANGLE_TO_FLOOR", 20);
+
+	public static final NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
+
+	public static final double HIGH_REFLECTIVE_HEIGHT_IN = 84;
+	public static final double LOW_REFLECTIVE_HEIGHT_IN = 78;
+
 	public static final Supplier<Double> BIG_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x0", 0)
-			+ 0.5 * NETWORK_TABLE.getNumber("width0", 0)) / CAMERA_WIDTH.get() - 0.5);
+			+ 0.5 * NETWORK_TABLE.getNumber("width0", 0)) / CAMERA_WIDTH - 0.5);
 	public static final Supplier<Double> SMALL_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x1", 0)
-			+ 0.5 * NETWORK_TABLE.getNumber("width1", 0)) / CAMERA_WIDTH.get() - 0.5);
+			+ 0.5 * NETWORK_TABLE.getNumber("width1", 0)) / CAMERA_WIDTH - 0.5);
 	public static Supplier<Double> TWO_OBJECTS_CENTER = () -> (BIG_OBJECT_CENTER.get() + SMALL_OBJECT_CENTER.get()) / 2;
-	public static PIDSource leftSource = new PIDSource() {
 
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource) {
-		}
+	private static final Supplier<Double> LOW_REFLECTIVE_HEIGHT_PX = () -> CAMERA_HEIGHT
+			- NETWORK_TABLE.getNumber("y1", 0.0) - 0.5 * NETWORK_TABLE.getNumber("height1", 0);
 
-		@Override
-		public double pidGet() {
-			return TWO_OBJECTS_CENTER.get();
-		}
+	private static final Supplier<Double> HIGH_REFLECTIVE_HEIGHT_PX = () -> CAMERA_HEIGHT
+			- NETWORK_TABLE.getNumber("y0", 0.0) - 0.5 * NETWORK_TABLE.getNumber("height0", 0);
 
-		@Override
-		public PIDSourceType getPIDSourceType() {
-			return PIDSourceType.kDisplacement;
-		}
-	};
-	public static PIDSource rightSource = new PIDSource() {
+	private static final Supplier<Double> cameraViewAngleToHighBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
+			* HIGH_REFLECTIVE_HEIGHT_PX.get() + BOILER_CAMERA_ANGLE_TO_FLOOR.get();
+	private static final Supplier<Double> cameraViewAngleToLowBoiler = () -> (CAMERA_VIEW_ANGLE_Y / CAMERA_HEIGHT)
+			* LOW_REFLECTIVE_HEIGHT_PX.get() + BOILER_CAMERA_ANGLE_TO_FLOOR.get();
 
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource) {
-		}
-
-		@Override
-		public double pidGet() {
-			return TWO_OBJECTS_CENTER.get();
-		}
-
-		@Override
-		public PIDSourceType getPIDSourceType() {
-			return PIDSourceType.kDisplacement;
-		}
-	};
+	private static final Supplier<Double> distanceHigh = () -> (HIGH_REFLECTIVE_HEIGHT_IN
+			- BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN) / Math.tan(Math.toRadians(cameraViewAngleToHighBoiler.get()));
+	private static final Supplier<Double> distanceLow = () -> (LOW_REFLECTIVE_HEIGHT_IN
+			- BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN)/ Math.tan(Math.toRadians(cameraViewAngleToLowBoiler.get()));
+	public static final Supplier<Double> distanceToBoiler = () -> (distanceHigh.get() + distanceLow.get()) / 2;
 
 }
