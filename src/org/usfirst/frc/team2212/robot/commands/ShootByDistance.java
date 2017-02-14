@@ -7,7 +7,7 @@ import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 import com.spikes2212.dashboard.ConstantHandler;
 
 public class ShootByDistance extends ShootBySpeed {
-	public static final double SHOOTING_ANGLE = 20; // FIXME find the real number
+	public static final double SHOOTING_ANGLE = 80; // FIXME find the real number
 	public static final double BOILER_HEIGHT = 97; // 8 ft. 1 in. 
 	public static final double GRAVITY = 386.1; // in/s^2
 
