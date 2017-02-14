@@ -7,8 +7,8 @@ import com.spikes2212.dashboard.ConstantHandler;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class ImageProcessingConstants {
-	public static final double CAMERA_WIDTH = 640.0;
-	public static final double CAMERA_HEIGHT = 360.0;
+	public static final int CAMERA_WIDTH = 640;
+	public static final int CAMERA_HEIGHT = 360;
 	public static final double CAMERA_ANGLE_Y = 32.0;
 	public static final double CAMERA_ANGLE_X = 58.75;
 	public static final double CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
