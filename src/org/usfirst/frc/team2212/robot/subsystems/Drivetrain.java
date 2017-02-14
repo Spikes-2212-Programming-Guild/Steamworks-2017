@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends TankDrivetrain {
 
-	public static final double DISTANCE_PER_PULSE = 1;
+	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 1440; // 1440 pulses per revolution,4 inch wheel
 	private SpeedController leftSpeedcontroller;
 	private SpeedController rightSpeedcontroller;
 	private Encoder leftEncoder;
@@ -22,6 +22,7 @@ public class Drivetrain extends TankDrivetrain {
 	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller, Encoder leftEncoder,
 			Encoder rightEncoder) {
 		this.leftSpeedcontroller = leftSpeedcontroller;
+		this.leftSpeedcontroller.setInverted(true);
 		this.rightSpeedcontroller = rightSpeedcontroller;
 		this.leftEncoder = leftEncoder;
 		this.rightEncoder = rightEncoder;
@@ -31,7 +32,7 @@ public class Drivetrain extends TankDrivetrain {
 
 	@Override
 	public void setLeft(double speedLeft) {
-		leftSpeedcontroller.set(-speedLeft);
+		leftSpeedcontroller.set(speedLeft);
 	}
 
 	@Override

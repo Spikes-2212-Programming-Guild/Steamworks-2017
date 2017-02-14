@@ -15,18 +15,13 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class Shooter extends LimitedSubsystem {
 
 	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
-	public static final double BOILER_HEIGHT = 96.8503937; // inch FIXME find
-															// the
-	// real number
-	public static final double SHOOTING_ANGLE = 80; // FIXME find the real
-	// number
 	private CANTalon motor;
 	private Encoder encoder;
 	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 0.1);
 	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 0.1);
 	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.1);
-	public static final double DISTANCE_PER_PULSE = 1; // TODO check the real
-														// value
+	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 20; // 20 pulses per revolution,4 inch wheel
+
 	private double speed;
 
 	public Shooter(CANTalon motor, Encoder encoder) {
