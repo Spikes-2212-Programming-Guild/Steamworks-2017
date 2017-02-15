@@ -15,6 +15,6 @@ public class OrientateAndMoveToGear extends CommandGroup {
 
 	public OrientateAndMoveToGear(Supplier<Double> turningSpeed, Supplier<Double> forwardsSpeed) {
 		addSequential(new OrientToGear(turningSpeed));
-		addSequential(new DriveArcade(Robot.drivetrain, forwardsSpeed.get(), 0));
+		addSequential(new DriveArcade(Robot.drivetrain, forwardsSpeed, () -> 0.0));
 	}
 }
