@@ -3,16 +3,22 @@ package org.usfirst.frc.team2212.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
+import org.usfirst.frc.team2212.robot.subsystems.Climber;
+import org.usfirst.frc.team2212.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2212.robot.subsystems.Feeder;
+import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
+import org.usfirst.frc.team2212.robot.subsystems.Picker;
+import org.usfirst.frc.team2212.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
 import org.usfirst.frc.team2212.robot.subsystems.Climber;
 import org.usfirst.frc.team2212.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team2212.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2212.robot.subsystems.Feeder;
 import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
 import org.usfirst.frc.team2212.robot.subsystems.Picker;
@@ -34,7 +40,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Climber climber;
 	public static BallBlocker ballBlocker;
@@ -95,14 +100,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
 	}
 
 	/**
@@ -114,10 +111,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 	}
 
 	/**

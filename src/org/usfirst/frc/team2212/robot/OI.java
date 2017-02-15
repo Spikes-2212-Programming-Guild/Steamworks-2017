@@ -3,7 +3,9 @@ package org.usfirst.frc.team2212.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
+import org.usfirst.frc.team2212.robot.commands.ShootBySpeed;
+import org.usfirst.frc.team2212.robot.commands.ShootLinear;
 
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
@@ -23,9 +25,11 @@ public class OI /* GEVALD */ {
 		SmartDashboard.putData("Feed", new MoveLimitedSubsystem(Robot.feeder, 0.5));
 		SmartDashboard.putData("Pick", new MoveLimitedSubsystem(Robot.picker, 0.5));
 		SmartDashboard.putData("Shoot", new MoveLimitedSubsystem(Robot.shooter, 0.5));
+		SmartDashboard.putData("ShootBySpeed", new ShootBySpeed(0.5));
+		SmartDashboard.putData("ShootByDistance", new ShootByDistance(()->0.5));
+		SmartDashboard.putData("ShootLinear", new ShootLinear(()->0.5));
 		SmartDashboard.putData("MoveForwards", new DriveTank(Robot.drivetrain, 0.5, 0.5));
 		SmartDashboard.putData("MoveBackwards", new DriveTank(Robot.drivetrain, -0.5, -0.5));
 
 	}
-
 }

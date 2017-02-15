@@ -14,6 +14,7 @@ public class Climber extends LimitedSubsystem {
 
     public Climber(CANTalon motor) {
         this.motor = motor;
+        this.motor.setInverted(true);
     }
 
     @Override

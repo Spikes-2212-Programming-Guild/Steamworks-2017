@@ -15,6 +15,7 @@ public class Picker extends LimitedSubsystem {
 
 	public Picker(SpeedController motor) {
 		this.motor = motor;
+		this.motor.setInverted(true);
 	}
 
 	@Override
