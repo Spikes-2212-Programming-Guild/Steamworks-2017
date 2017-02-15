@@ -2,8 +2,6 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
-import org.usfirst.frc.team2212.robot.subsystems.Shooter;
-
 public class ShootByDistance extends ShootBySpeed {
 
 	public static final double SHOOTING_ANGLE = 80; // FIXME find the real
@@ -11,8 +9,8 @@ public class ShootByDistance extends ShootBySpeed {
 	public static final double BOILER_HEIGHT = 97; // 8 ft. 1 in.
 	public static final double GRAVITY = 386.1; // in/s^2
 
-	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
-		super(shooter, () -> calculateSpeedByDistance(distance.get()), KP, KI, KD);
+	public ShootByDistance(Supplier<Double> distance) {
+		super(() -> calculateSpeedByDistance(distance.get()));
 	}
 
 	private static double calculateSpeedByDistance(double distance) {
