@@ -4,16 +4,15 @@ import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Picker extends LimitedSubsystem {
+public class Feeder extends LimitedSubsystem {
 
 	private SpeedController motor;
 
-	public Picker(SpeedController motor) {
+	public Feeder(SpeedController motor) {
 		this.motor = motor;
 		this.motor.setInverted(true);
 	}

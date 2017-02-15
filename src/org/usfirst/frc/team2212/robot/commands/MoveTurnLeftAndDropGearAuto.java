@@ -20,7 +20,7 @@ public class MoveTurnLeftAndDropGearAuto extends CommandGroup {
 	    	Supplier<Double> movingTime = ConstantHandler.addConstantDouble("MoveTurnLeftAndDropGearAuto-movingTime", 4);
 	      
 	    	addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), movingTime.get());
-	        addSequential(new OrienateToGear(turningSpeed));
+	        addSequential(new OrientToGear(turningSpeed));
 	        addSequential(new DriveTank(drivetrain, movingSpeed, movingSpeed), moveToGearTime.get());
 	        addSequential(new DropGear());
 	    }
