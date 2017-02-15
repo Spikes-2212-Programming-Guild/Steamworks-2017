@@ -15,9 +15,10 @@ public class OrientToTwoTargets extends CommandGroup {
 
 	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
 		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
-		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource,
-				rightOrientationSource, 0, 0, KP, KI, KD, tolerance));
+		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource, rightOrientationSource, 0, 0, KP,
+				KI, KD, tolerance));
 	}
+
 	private static PIDSource leftOrientationSource = new PIDSource() {
 
 		@Override
