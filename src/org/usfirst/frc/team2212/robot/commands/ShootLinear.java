@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import com.spikes2212.dashboard.ConstantHandler;
 
-public class ShootLinear extends ShootBySpeed {
+public class ShootLinear extends ShootByVoltage {
 
 	public static final Supplier<Double> distanceToSpeedRatio = ConstantHandler
 			.addConstantDouble("ShootLinear-distanceToSpeedRatio", 0.7);

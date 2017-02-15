@@ -2,7 +2,7 @@ package org.usfirst.frc.team2212.robot.commands;
 
 import java.util.function.Supplier;
 
-public class ShootByDistance extends ShootBySpeed {
+public class ShootByDistance extends ShootByVoltage {
 
 	public static final double SHOOTING_ANGLE = 80; // FIXME find the real
 													// number
