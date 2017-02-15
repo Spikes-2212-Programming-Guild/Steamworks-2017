@@ -3,6 +3,8 @@ package org.usfirst.frc.team2212.robot.subsystems;
 import java.util.function.Supplier;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.PigeonImu.CalibrationMode;
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 import edu.wpi.first.wpilibj.Encoder;
@@ -14,22 +16,11 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  */
 public class Shooter extends LimitedSubsystem {
 
-	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
 	private CANTalon motor;
-	private Encoder encoder;
-	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 0.1);
-	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 0.1);
-	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.1);
-	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 20; // 20 pulses per revolution,4 inch wheel
 
-	private double speed;
-
-	public Shooter(CANTalon motor, Encoder encoder) {
-		encoder.setPIDSourceType(PIDSourceType.kRate);
-		encoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-		this.encoder = encoder;
+	public Shooter(CANTalon motor) {
 		this.motor = motor;
-		speed = 0;
+		motor.changeControlMode(TalonControlMode.Voltage);
 	}
 
 	@Override
@@ -44,13 +35,12 @@ public class Shooter extends LimitedSubsystem {
 
 	@Override
 	public PIDSource getPIDSource() {
-		return encoder;
+		return null;
 	}
 
 	@Override
-	protected void move(double additionalSpeed) {
-		speed += additionalSpeed * acceleration.get();
-		motor.set(speed);
+	protected void move(double voltage) {
+		motor.set(voltage);
 	}
 
 	@Override
