@@ -6,8 +6,9 @@ import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 
 public class ShootByDistance extends ShootBySpeed {
 
-	public static final double SHOOTING_ANGLE = 80; // FIXME find the real number
-	public static final double BOILER_HEIGHT = 97; // 8 ft. 1 in. 
+	public static final double SHOOTING_ANGLE = 80; // FIXME find the real
+													// number
+	public static final double BOILER_HEIGHT = 97; // 8 ft. 1 in.
 	public static final double GRAVITY = 386.1; // in/s^2
 
 	public ShootByDistance(Shooter shooter, Supplier<Double> distance, double KP, double KI, double KD) {
@@ -34,7 +35,7 @@ public class ShootByDistance extends ShootBySpeed {
 		 */
 		double angleInRadians = Math.toRadians(SHOOTING_ANGLE);
 
-		double speed = Math.sqrt(GRAVITY/2 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
+		double speed = Math.sqrt(GRAVITY / 2 * Math.pow(distance / (Math.cos(angleInRadians)), 2)
 				/ (distance * Math.tan(angleInRadians) - BOILER_HEIGHT));
 		return speed;
 	}
