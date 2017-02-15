@@ -17,7 +17,6 @@ public class TurnToTwoTargets extends DriveArcade {
 
 	public TurnToTwoTargets(Supplier<Double> rotateSpeedSupplier) {
 		super(Robot.drivetrain, () -> 0.0, rotateSpeedSupplier);
-
 	}
 
 	@Override
