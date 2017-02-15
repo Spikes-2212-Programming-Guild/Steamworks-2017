@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import org.usfirst.frc.team2212.robot.ImageProcessingConstants;
 import org.usfirst.frc.team2212.robot.Robot;
-import org.usfirst.frc.team2212.robot.subsystems.Shooter;
 
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
@@ -30,7 +29,6 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 		// moves to the boiler turns to it and shoots
 		addSequential(new DriveTank(Robot.drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
 		addSequential(new OrientToBoiler(turnToBoilerSpeed));
-		addSequential(new ShootByDistance(Robot.shooter, ImageProcessingConstants.distanceToBoiler, Shooter.KP.get(),
-				Shooter.KI.get(), Shooter.KD.get()));
+		addSequential(new ShootByDistance(ImageProcessingConstants.distanceToBoiler));
 	}
 }
