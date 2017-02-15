@@ -27,7 +27,7 @@ public class ImageProcessingConstants {
 	// calculates the center of the small reflective
 	public static final Supplier<Double> SMALL_OBJECT_CENTER = () -> ((NETWORK_TABLE.getNumber("x1", 0)
 			+ 0.5 * NETWORK_TABLE.getNumber("width1", 0)) / CAMERA_WIDTH - 0.5);
-	// calculates the center of the boiler
+	// calculates the center of the two reflectives
 	public static Supplier<Double> TWO_OBJECTS_CENTER = () -> (BIG_OBJECT_CENTER.get() + SMALL_OBJECT_CENTER.get()) / 2;
 
 	// calculates the height of the center of the high reflective from the
