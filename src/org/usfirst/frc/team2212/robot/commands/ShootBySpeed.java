@@ -17,8 +17,7 @@ public class ShootBySpeed extends MoveLimitedSubsystemWithPID {
 	}
 
 	public ShootBySpeed(double wantedSpeed) {
-		super(Robot.shooter, Robot.shooter.getPIDSource(), wantedSpeed, Shooter.KP.get(), Shooter.KI.get(),
-				Shooter.KD.get(), 0);
+		super(Robot.shooter, wantedSpeed, Shooter.KP.get(), Shooter.KI.get(), Shooter.KD.get(), 0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
