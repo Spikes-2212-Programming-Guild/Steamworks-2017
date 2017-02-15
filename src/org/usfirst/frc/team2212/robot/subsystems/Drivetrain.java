@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import org.usfirst.frc.team2212.robot.Robot;
+
 import com.spikes2212.genericsubsystems.drivetrains.TankDrivetrain;
+import com.spikes2212.genericsubsystems.drivetrains.commands.DriveArcade;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -52,6 +55,6 @@ public class Drivetrain extends TankDrivetrain {
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		setDefaultCommand(new DriveArcade(this, Robot.oi::getForwardY, Robot.oi::getRotateY));
 	}
 }

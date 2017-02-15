@@ -4,10 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team2212.robot.commands.ExampleCommand;
-
-import com.spikes2212.genericsubsystems.drivetrains.commands.DriveArcade;
-import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
+import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
 import com.spikes2212.utils.XboXUID;
 
@@ -16,74 +13,91 @@ import com.spikes2212.utils.XboXUID;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI /* GEVALD */ {
+	
+	// TODO CHANGE ALL SPEEDS!
 
-	private DrivingMethod drivingMethod = DrivingMethod.TWO_JOYSTICK_ARCADE;
-	private double directionMultiplier = 1;
-	private double speedMultiplier = 1;
-	// Joysticks
-	private Joystick driverRightJoystick = new Joystick(0);
-	private Joystick driverLeftJoystick = new Joystick(1);
-	private XboXUID driverXbox = new XboXUID(3);
-
-	// Driver joystick buttons
-	private JoystickButton setPickerForward = new JoystickButton(driverRightJoystick, 2);
-	private JoystickButton setPickerBackward = new JoystickButton(driverRightJoystick, 3);
-	private JoystickButton setSpeedToHalf = new JoystickButton(driverRightJoystick, 4);
-	private JoystickButton setSpeedToNormal = new JoystickButton(driverRightJoystick, 5);
-
-	// Driver xbox buttons
-	private Button setPickerForwardXbox = driverXbox.getYellowButton();
-	private Button setPickerBackwardXbox = driverXbox.getBlueButton();
-	private Button setSpeedToHalfXbox = driverXbox.getRedButton();
-	private Button setSpeedToNormalXbox = driverXbox.getGreenButton();
-
-	// Switching driving method buttons
-	private Button setToDriveTankJoystick;
-	private Button setToDriveArcadeTwoJoystick;
-	private Button setToDriveArcadeOneJoystick;
-	private Button setToDriveTankJoystickXbox;
-	private Button setToDriveArcadeTwoJoystickXbox;
-	private Button setToDriveArcadeOneJoystickXbox;
-
+	// controllers
+	private Joystick driverRight = new Joystick(0);
+	private Joystick driverLeft = new Joystick(1);
+	
+	private Joystick navigatorJoystick = new Joystick(2);
+	private XboXUID navigatorXbox = new XboXUID(3);
+	
+	// driverRight buttons TODO maybe there are more buttons 
+	private JoystickButton switchToFrontCameraButton = new JoystickButton(driverRight, 0);
+	private JoystickButton switchToRearCameraButton = new JoystickButton(driverRight, 1);
+	
+	// joystick navigator buttons
+	private JoystickButton dropGearButton = new JoystickButton(navigatorJoystick, 0);
+	private JoystickButton raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
+	private JoystickButton lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
+	private JoystickButton shootFuelButton = new JoystickButton(navigatorJoystick, 3);
+	private JoystickButton pickFuelButton = new JoystickButton(navigatorJoystick, 4);
+	private JoystickButton climbRopeButton = new JoystickButton(navigatorJoystick, 5);
+	
+	// Xbox navigator buttons
+	private Button dropGearXbox = navigatorXbox.getBlueButton();
+	private Button raiseBallBlockerXbox = navigatorXbox.getUpButton();
+	private Button lowerBallBlockerXbox = navigatorXbox.getDownButton();
+	private Button shootFuelXbox = navigatorXbox.getRbButton();
+	private Button pickFuelXbox = navigatorXbox.getYellowButton();
+	private Button climbRopeXbox = navigatorXbox.getGreenButton();
+	
+	// constructor
 	public OI() {
 		initJoystickDriver();
-		setToDriveTankJoystick.whenPressed(
-				new DriveTank(Robot.Drivetrain, () -> (adjustInput(driverLeftJoystick.getY()) * speedMultiplier * directionMultiplier),
-						() -> (adjustInput(driverRightJoystick.getY()) * speedMultiplier * directionMultiplier)));
-		setToDriveArcadeOneJoystick.whenPressed(
-				new DriveArcade(Robot.Drivetrain, () -> (adjustInput(driverRightJoystick.getY()) * speedMultiplier * directionMultiplier),
-						() -> adjustInput(driverRightJoystick.getX())));
-
-		setToDriveArcadeTwoJoystick.whenPressed(
-				new DriveArcade(Robot.Drivetrain, () -> (adjustInput(driverRightJoystick.getY()) * speedMultiplier * directionMultiplier),
-						() -> adjustInput(driverLeftJoystick.getY())));
-
-		setToDriveTankJoystickXbox.whenPressed(
-				new DriveTank(Robot.Drivetrain, () -> (adjustInput(driverXbox.getLeftY()) * speedMultiplier * directionMultiplier),
-						() -> (adjustInput(driverXbox.getRightY()) * speedMultiplier * directionMultiplier)));
-		setToDriveArcadeOneJoystickXbox.whenPressed(
-				new DriveArcade(Robot.Drivetrain, () -> (adjustInput(driverXbox.getRightY()) * speedMultiplier * directionMultiplier),
-						() -> adjustInput(driverXbox.getRightX())));
-		setToDriveArcadeTwoJoystickXbox.whenPressed(
-				new DriveArcade(Robot.Drivetrain, () -> (adjustInput(driverXbox.getRightY()) * speedMultiplier * directionMultiplier),
-						() -> adjustInput(driverXbox.getLeftY())));
+		initJoystickNavigator();
+		initXboxNavigator();
 	}
 
+	// sets all commands connected to RightDriver
 	private void initJoystickDriver() {
-		setPickerForward.whenPressed(new RunnableCommand(() -> directionMultiplier = 1));
-		setPickerBackward.whenPressed(new RunnableCommand(() -> directionMultiplier = -1));
-		setSpeedToHalf.whenPressed(new RunnableCommand(() -> speedMultiplier = 0.5));
-		setSpeedToNormal.whenPressed(new RunnableCommand(() ->  speedMultiplier = 1));
+		switchToFrontCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(1)));
+		switchToRearCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(0)));
+	}
+	
+	// sets all commands connected to navigatorJoystick
+	private void initJoystickNavigator(){
+		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
+		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
+		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
+		shootFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.shooter, 1));
+		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, 0.7));
+		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, 0.7));
 	}
 
-	private void initXboxDriver() {
-		setPickerForwardXbox.whenPressed(new RunnableCommand(() -> directionMultiplier = 1));
-		setPickerBackwardXbox.whenPressed(new RunnableCommand(() -> directionMultiplier = -1));
-		setSpeedToHalfXbox.whenPressed(new RunnableCommand(() -> speedMultiplier = 0.5));
-		setSpeedToNormalXbox.whenPressed(new RunnableCommand(() ->  speedMultiplier = 1));
+	// sets all commands connected to navigatorXbox
+	private void initXboxNavigator(){
+		dropGearXbox.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
+		raiseBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
+		lowerBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
+		shootFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.shooter, 1));
+		pickFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.picker, 0.7));
+		climbRopeXbox.whenPressed(new MoveLimitedSubsystem(Robot.climber, 0.7));
 	}
-
+	
+	//receives input, returns the adjusted input for better sensitivity
 	private double adjustInput(double input) {
 		return input * Math.abs(input);
+	}
+	
+	//returns the adjusted value of the turning joystick's Y
+	public double getRotateY(){
+		return adjustInput(driverLeft.getY());
+	}
+	
+	//returns the adjusted value of the turning joystick's X
+	public double getRotateX(){
+		return adjustInput(driverLeft.getX());
+	}
+		
+	//returns the adjusted value of the driving joystick's Y
+	public double getForwardY(){
+		return adjustInput(driverRight.getY());
+	}
+	
+	//returns the adjusted value of the driving joystick's X
+	public double getForwardX(){
+		return adjustInput(driverRight.getX());
 	}
 }
