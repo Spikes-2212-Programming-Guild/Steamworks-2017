@@ -16,14 +16,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
-	public static final Supplier<Double> movingSpeed = ConstantHandler
-			.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-movingSpeed", 0.5);
-	public static final Supplier<Double> movingTime = ConstantHandler
-			.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-movingTime", 3);
-
-	public static final Supplier<Double> turnToGearSpeed = ConstantHandler
-			.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-turnToGearSpeed", 3);
-
 	public static final Supplier<Double> turnToBoilerSpeed = ConstantHandler
 			.addConstantDouble("MoveDropGearMoveToBoilerAndShootAuto-turnToBoilerSpeed", 0.5);
 	public static final Supplier<Double> moveToBoilerSpeed = ConstantHandler
@@ -35,7 +27,6 @@ public class MoveDropGearMoveToBoilerAndShootAuto extends CommandGroup {
 
 		addSequential(new MoveTurnLeftAndDropGearAuto()); // Moves Turns Left
 															// And Drops Gear
-
 		// moves to the boiler turns to it and shoots
 		addSequential(new DriveTank(Robot.drivetrain, moveToBoilerSpeed, moveToBoilerSpeed), moveToBoilerTime.get());
 		addSequential(new OrientToBoiler(turnToBoilerSpeed));
