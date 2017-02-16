@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class Feeder extends LimitedSubsystem {
 
 	private SpeedController motor;
-	public static final Supplier<Double> feedingSpeed = ConstantHandler.addConstantDouble("Feeder-feedingSpeed", 0.35);
+	public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Feeder-SPEED", 0.35);
 
 	public Feeder(SpeedController motor) {
 		this.motor = motor;

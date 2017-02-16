@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class FeedAndShootLinear extends CommandGroup {
 	public FeedAndShootLinear(Supplier<Double> distance) {
-		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.feedingSpeed));
+		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
 		addSequential(new ShootLinear(distance));
 	}
 }

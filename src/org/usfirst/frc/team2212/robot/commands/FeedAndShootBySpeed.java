@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FeedAndShootBySpeed extends CommandGroup {
 
 	public FeedAndShootBySpeed(Supplier<Double> wantedSpeed) {
-		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.feedingSpeed));
+		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
 		addSequential(new ShootBySpeed(wantedSpeed));
 	}
 

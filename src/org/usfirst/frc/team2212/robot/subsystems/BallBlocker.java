@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 public class BallBlocker extends LimitedSubsystem {
-	public static final Supplier<Double> upSpeed = ConstantHandler.addConstantDouble("BallBlocker-upSpeed", 0.5);
-	public static final Supplier<Double> downSpeed = ConstantHandler.addConstantDouble("BallBlocker-downSpeed", -0.5);
+	public static final Supplier<Double> UP_SPEED = ConstantHandler.addConstantDouble("BallBlocker-UP_SPEED", 0.5);
+	public static final Supplier<Double> DOWN_SPEED = ConstantHandler.addConstantDouble("BallBlocker-UP_SPEED", -0.5);
 
 	private SpeedController motor;
 	private DigitalInput up;
