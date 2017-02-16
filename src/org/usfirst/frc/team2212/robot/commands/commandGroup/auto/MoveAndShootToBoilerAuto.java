@@ -1,9 +1,11 @@
-package org.usfirst.frc.team2212.robot.commands;
+package org.usfirst.frc.team2212.robot.commands.commandGroup.auto;
 
 import java.util.function.Supplier;
 
 import org.usfirst.frc.team2212.robot.ImageProcessingConstants;
 import org.usfirst.frc.team2212.robot.Robot;
+import org.usfirst.frc.team2212.robot.commands.commandGroup.FeedAndShootByDistance;
+import org.usfirst.frc.team2212.robot.commands.orientation.OrientToBoiler;
 import org.usfirst.frc.team2212.robot.subsystems.Feeder;
 
 import com.spikes2212.dashboard.ConstantHandler;

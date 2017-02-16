@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2212.robot.commands;
+package org.usfirst.frc.team2212.robot.commands.shooting;
 
 import java.util.function.Supplier;
 
