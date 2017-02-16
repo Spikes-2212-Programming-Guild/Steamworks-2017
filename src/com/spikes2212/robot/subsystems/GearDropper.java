@@ -2,12 +2,12 @@ package com.spikes2212.robot.subsystems;
 
 import java.util.function.Supplier;
 
-import org.usfirst.frc.team2212.robot.Robot;
 
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 
+import com.spikes2212.robot.Robot;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SpeedController;

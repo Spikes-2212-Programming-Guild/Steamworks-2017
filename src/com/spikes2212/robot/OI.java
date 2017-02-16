@@ -1,17 +1,16 @@
 package com.spikes2212.robot;
 
+import com.spikes2212.robot.commands.FeedAndShootByDistance;
+import com.spikes2212.robot.commands.OrientateAndMoveToGear;
+import com.spikes2212.robot.commands.orientation.OrientToBoiler;
+import com.spikes2212.robot.subsystems.BallBlocker;
+import com.spikes2212.robot.subsystems.Climber;
+import com.spikes2212.robot.subsystems.GearDropper;
+import com.spikes2212.robot.subsystems.Picker;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
-import org.usfirst.frc.team2212.robot.commands.OrientToBoiler;
-import org.usfirst.frc.team2212.robot.commands.OrientateAndMoveToGear;
-import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
-import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
-import org.usfirst.frc.team2212.robot.subsystems.Climber;
-import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
-import org.usfirst.frc.team2212.robot.subsystems.Picker;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
