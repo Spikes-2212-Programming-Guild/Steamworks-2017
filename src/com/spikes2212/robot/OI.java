@@ -1,12 +1,12 @@
 package com.spikes2212.robot;
 
-import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
-import org.usfirst.frc.team2212.robot.commands.FeedAndShootBySpeed;
-import org.usfirst.frc.team2212.robot.commands.FeedAndShootLinear;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
 
+import com.spikes2212.robot.commands.FeedAndShootByDistance;
+import com.spikes2212.robot.commands.FeedAndShootBySpeed;
+import com.spikes2212.robot.commands.FeedAndShootLinear;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
