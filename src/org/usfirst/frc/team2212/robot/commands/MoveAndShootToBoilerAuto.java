@@ -30,7 +30,6 @@ public class MoveAndShootToBoilerAuto extends CommandGroup {
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
 		addSequential(new OrientToBoiler(turningSpeed));
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingToBoilerTime.get());
-		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
-		addSequential(new ShootByDistance(ImageProcessingConstants.distanceToBoiler));
+		addSequential(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
 	}
 }
