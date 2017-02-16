@@ -1,4 +1,4 @@
-package com.spikes2212.robot.commands.commandGroup.auto;
+package com.spikes2212.robot.commands.autonomous;
 
 import java.util.function.Supplier;
 
@@ -7,7 +7,7 @@ import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
 import com.spikes2212.robot.ImageProcessingConstants;
 import com.spikes2212.robot.Robot;
-import com.spikes2212.robot.commands.commandGroup.FeedAndShootByDistance;
+import com.spikes2212.robot.commands.FeedAndShootByDistance;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
 import com.spikes2212.robot.subsystems.Feeder;
 

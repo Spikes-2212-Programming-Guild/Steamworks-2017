@@ -1,4 +1,4 @@
-package com.spikes2212.robot.commands.commandGroup;
+package com.spikes2212.robot.commands;
 
 import java.util.function.Supplier;
 

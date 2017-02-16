@@ -1,4 +1,4 @@
-package com.spikes2212.robot.commands.commandGroup.auto;
+package com.spikes2212.robot.commands.autonomous;
 
 import java.util.function.Supplier;
 
@@ -6,7 +6,7 @@ import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
 import com.spikes2212.robot.Robot;
-import com.spikes2212.robot.commands.commandGroup.OrientateAndMoveToGear;
+import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.subsystems.GearDropper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
