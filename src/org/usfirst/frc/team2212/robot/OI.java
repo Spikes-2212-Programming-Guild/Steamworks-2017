@@ -24,16 +24,16 @@ public class OI /* GEVALD */ {
 	private XboXUID navigatorXbox = new XboXUID(3);
 	
 	// driverRight buttons TODO maybe there are more buttons 
-	private JoystickButton switchToFrontCameraButton = new JoystickButton(driverRight, 0);
-	private JoystickButton switchToRearCameraButton = new JoystickButton(driverRight, 1);
+	private Button switchToFrontCameraButton = new JoystickButton(driverRight, 0);
+	private Button switchToRearCameraButton = new JoystickButton(driverRight, 1);
 	
 	// joystick navigator buttons
-	private JoystickButton dropGearButton = new JoystickButton(navigatorJoystick, 0);
-	private JoystickButton raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
-	private JoystickButton lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
-	private JoystickButton shootFuelButton = new JoystickButton(navigatorJoystick, 3);
-	private JoystickButton pickFuelButton = new JoystickButton(navigatorJoystick, 4);
-	private JoystickButton climbRopeButton = new JoystickButton(navigatorJoystick, 5);
+	private Button dropGearButton = new JoystickButton(navigatorJoystick, 0);
+	private Button raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
+	private Button lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
+	private Button shootFuelButton = new JoystickButton(navigatorJoystick, 3);
+	private Button pickFuelButton = new JoystickButton(navigatorJoystick, 4);
+	private Button climbRopeButton = new JoystickButton(navigatorJoystick, 5);
 	
 	// Xbox navigator buttons
 	private Button dropGearXbox = navigatorXbox.getBlueButton();
