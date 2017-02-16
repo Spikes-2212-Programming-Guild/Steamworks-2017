@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
+import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
+
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
 import com.spikes2212.utils.XboXUID;
@@ -75,7 +78,7 @@ public class OI /* GEVALD */ {
 		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
 		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
 		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
-		shootFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.shooter, 1));
+		shootFuelButton.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
 		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, 0.7));
 		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, 0.7));
 	}
