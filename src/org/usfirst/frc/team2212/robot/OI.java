@@ -105,23 +105,19 @@ public class OI /* GEVALD */ {
 		return input * Math.abs(input);
 	}
 	
-	//returns the adjusted value of the turning joystick's Y
-	public double getRotateY(){
-		return adjustInput(driverLeft.getY());
-	}
-	
-	//returns the adjusted value of the turning joystick's X
-	public double getRotateX(){
+	//returns the adjusted value of the Rotate 
+	// switch this to switch between the 2 drive arcade methods
+	public double getRotate(){
 		return adjustInput(driverLeft.getX());
 	}
 		
-	//returns the adjusted value of the driving joystick's Y
-	public double getForwardY(){
+	//returns the adjusted value of the driving right joystick's y
+	public double getForwardRight(){
 		return adjustInput(driverRight.getY());
 	}
 	
-	//returns the adjusted value of the driving joystick's X
-	public double getForwardX(){
-		return adjustInput(driverRight.getX());
+	//returns the adjusted value of the driving left joystick's y
+	public double getForwardLeft(){
+		return adjustInput(driverLeft.getY());
 	}
 }
