@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class FeedAndShootByDistance extends CommandGroup {
 
 	public FeedAndShootByDistance(Supplier<Double> distance) {
-		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
+		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.feedingSpeed));
 		addSequential(new ShootByDistance(distance));
 	}
 }

@@ -23,6 +23,6 @@ public class MoveStraightAndDropGearAuto extends CommandGroup {
 
 	public MoveStraightAndDropGearAuto() {
 		addSequential(new DriveTank(Robot.drivetrain, movingSpeed, movingSpeed), movingTime.get());
-		addSequential(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
+		addSequential(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.openingSpeed));
 	}
 }
