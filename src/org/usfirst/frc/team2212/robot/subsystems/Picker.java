@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2212.robot.subsystems;
 
+import java.util.function.Supplier;
+
+import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
@@ -10,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Picker extends LimitedSubsystem {
+
+	public static final Supplier<Double> pickingSpeed = ConstantHandler.addConstantDouble("Picker-pickingSpeed", 0.8);
 
 	private SpeedController motor;
 
