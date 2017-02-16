@@ -8,6 +8,7 @@ import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
 import org.usfirst.frc.team2212.robot.commands.OrientToBoiler;
 import org.usfirst.frc.team2212.robot.commands.OrientateAndMoveToGear;
 import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
+import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
@@ -79,7 +80,7 @@ public class OI /* GEVALD */ {
 		pickFuelButton = new JoystickButton(navigatorJoystick, 4);
 		climbRopeButton = new JoystickButton(navigatorJoystick, 5);
 
-		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
+		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
 		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
 		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
 		shootFuelButton.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
