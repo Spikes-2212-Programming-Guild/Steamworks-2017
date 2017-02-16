@@ -2,8 +2,11 @@ package org.usfirst.frc.team2212.robot.subsystems;
 
 import java.util.function.Supplier;
 
+import org.usfirst.frc.team2212.robot.Robot;
+
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
+import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -48,5 +51,10 @@ public class GearDropper extends LimitedSubsystem {
 	@Override
 	protected void move(double speed) {
 		motor.set(speed);
+	}
+	
+	@Override
+	protected void initDefaultCommand(){
+		setDefaultCommand(new MoveLimitedSubsystem(Robot.gearDropper, CLOSING_SPEED));
 	}
 }
