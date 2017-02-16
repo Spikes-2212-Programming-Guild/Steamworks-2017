@@ -24,24 +24,24 @@ public class OI /* GEVALD */ {
 	private XboXUID navigatorXbox = new XboXUID(3);
 	
 	// driverRight buttons TODO maybe there are more buttons 
-	private Button switchToFrontCameraButton = new JoystickButton(driverRight, 0);
-	private Button switchToRearCameraButton = new JoystickButton(driverRight, 1);
+	private Button switchToFrontCameraButton;
+	private Button switchToRearCameraButton;
 	
 	// joystick navigator buttons
-	private Button dropGearButton = new JoystickButton(navigatorJoystick, 0);
-	private Button raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
-	private Button lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
-	private Button shootFuelButton = new JoystickButton(navigatorJoystick, 3);
-	private Button pickFuelButton = new JoystickButton(navigatorJoystick, 4);
-	private Button climbRopeButton = new JoystickButton(navigatorJoystick, 5);
+	private Button dropGearButton;
+	private Button raiseBallBlockerButton;
+	private Button lowerBallBlockerButton;
+	private Button shootFuelButton;
+	private Button pickFuelButton;
+	private Button climbRopeButton;
 	
 	// Xbox navigator buttons
-	private Button dropGearXbox = navigatorXbox.getBlueButton();
-	private Button raiseBallBlockerXbox = navigatorXbox.getUpButton();
-	private Button lowerBallBlockerXbox = navigatorXbox.getDownButton();
-	private Button shootFuelXbox = navigatorXbox.getRbButton();
-	private Button pickFuelXbox = navigatorXbox.getYellowButton();
-	private Button climbRopeXbox = navigatorXbox.getGreenButton();
+	private Button dropGearXbox;
+	private Button raiseBallBlockerXbox;
+	private Button lowerBallBlockerXbox;
+	private Button shootFuelXbox;
+	private Button pickFuelXbox;
+	private Button climbRopeXbox;
 	
 	// constructor
 	public OI() {
@@ -50,10 +50,30 @@ public class OI /* GEVALD */ {
 		initXboxNavigator();
 	}
 
-	// sets all commands connected to RightDriver
+	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
+		switchToFrontCameraButton = new JoystickButton(driverRight, 0);
+		switchToRearCameraButton = new JoystickButton(driverRight, 1);
+		
+		dropGearButton = new JoystickButton(navigatorJoystick, 0);
+		raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
+		lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
+		shootFuelButton = new JoystickButton(navigatorJoystick, 3);
+		pickFuelButton = new JoystickButton(navigatorJoystick, 4);
+		climbRopeButton = new JoystickButton(navigatorJoystick, 5);
+		
 		switchToFrontCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(1)));
 		switchToRearCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(0)));
+	}
+	
+	// sets all commands and buttons connected to xbox driver
+	private void initXBoxDriver() { 
+		dropGearXbox = navigatorXbox.getBlueButton();
+		raiseBallBlockerXbox = navigatorXbox.getUpButton();
+		lowerBallBlockerXbox = navigatorXbox.getDownButton();
+		shootFuelXbox = navigatorXbox.getRbButton();
+		pickFuelXbox = navigatorXbox.getYellowButton();
+		climbRopeXbox = navigatorXbox.getGreenButton();
 	}
 	
 	// sets all commands connected to navigatorJoystick
