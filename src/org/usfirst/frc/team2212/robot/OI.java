@@ -26,6 +26,8 @@ public class OI /* GEVALD */ {
 	// driverRight buttons TODO maybe there are more buttons 
 	private Button switchToFrontCameraButton;
 	private Button switchToRearCameraButton;
+	private Button orientateAndMoveToGearButton;
+	private Button orientToBoiler;
 	
 	// joystick navigator buttons
 	private Button dropGearButton;
@@ -52,8 +54,10 @@ public class OI /* GEVALD */ {
 
 	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
-		switchToFrontCameraButton = new JoystickButton(driverRight, 0);
-		switchToRearCameraButton = new JoystickButton(driverRight, 1);
+		switchToFrontCameraButton = new JoystickButton(driverRight, 3);
+		switchToRearCameraButton = new JoystickButton(driverRight, 4);
+		orientateAndMoveToGearButton= new JoystickButton(driverRight, 0);
+		orientToBoiler = new JoystickButton(driverRight, 1);
 		
 		dropGearButton = new JoystickButton(navigatorJoystick, 0);
 		raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
