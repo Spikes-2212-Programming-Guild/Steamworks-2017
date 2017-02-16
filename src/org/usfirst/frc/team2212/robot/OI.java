@@ -8,7 +8,10 @@ import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
 import org.usfirst.frc.team2212.robot.commands.OrientToBoiler;
 import org.usfirst.frc.team2212.robot.commands.OrientateAndMoveToGear;
 import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
+import org.usfirst.frc.team2212.robot.subsystems.BallBlocker;
+import org.usfirst.frc.team2212.robot.subsystems.Climber;
 import org.usfirst.frc.team2212.robot.subsystems.GearDropper;
+import org.usfirst.frc.team2212.robot.subsystems.Picker;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
@@ -80,12 +83,12 @@ public class OI /* GEVALD */ {
 		pickFuelButton = new JoystickButton(navigatorJoystick, 4);
 		climbRopeButton = new JoystickButton(navigatorJoystick, 5);
 
-		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPEN_SPEED));
-		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
-		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
+		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
+		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
+		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
 		shootFuelButton.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
-		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, 0.7));
-		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, 0.7));
+		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
+		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 	}
 
 	// sets all commands connected to navigatorXbox
@@ -97,12 +100,12 @@ public class OI /* GEVALD */ {
 		pickFuelXbox = navigatorXbox.getYellowButton();
 		climbRopeXbox = navigatorXbox.getGreenButton();
 
-		dropGearXbox.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
-		raiseBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
-		lowerBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
-		shootFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.shooter, 1));
-		pickFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.picker, 0.7));
-		climbRopeXbox.whenPressed(new MoveLimitedSubsystem(Robot.climber, 0.7));
+		dropGearXbox.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
+		raiseBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
+		lowerBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
+		shootFuelXbox.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
+		pickFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
+		climbRopeXbox.whenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 	}
 
 	// receives input, returns the adjusted input for better sensitivity
