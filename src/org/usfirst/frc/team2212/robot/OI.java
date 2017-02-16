@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team2212.robot.commands.FeedAndShootByDistance;
+import org.usfirst.frc.team2212.robot.commands.OrientToBoiler;
+import org.usfirst.frc.team2212.robot.commands.OrientateAndMoveToGear;
 import org.usfirst.frc.team2212.robot.commands.ShootByDistance;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
@@ -61,9 +63,11 @@ public class OI /* GEVALD */ {
 		switchToRearCameraButton = new JoystickButton(driverRight, 4);
 		orientateAndMoveToGearButton = new JoystickButton(driverRight, 0);
 		orientToBoiler = new JoystickButton(driverRight, 1);
-
+		
 		switchToFrontCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(1)));
 		switchToRearCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(0)));
+		orientateAndMoveToGearButton.whileHeld(new OrientateAndMoveToGear(this::getRotate, this::getForwardRight));
+		orientToBoiler.whileHeld(new OrientToBoiler(this::getRotate));
 	}
 
 	// sets all commands and buttons connected to navigatorJoystick
