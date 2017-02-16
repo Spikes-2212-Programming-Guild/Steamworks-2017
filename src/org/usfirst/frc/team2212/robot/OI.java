@@ -70,8 +70,8 @@ public class OI /* GEVALD */ {
 		
 		switchToFrontCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(1)));
 		switchToRearCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(0)));
-		orientateAndMoveToGearButton.whileHeld(new OrientateAndMoveToGear(this::getRotate, this::getForwardRight));
-		orientToBoiler.whileHeld(new OrientToBoiler(this::getRotate));
+		orientateAndMoveToGearButton.whileHeld(new OrientateAndMoveToGear(this::getRotation, this::getForwardRight));
+		orientToBoiler.whileHeld(new OrientToBoiler(this::getRotation));
 	}
 
 	// sets all commands and buttons connected to navigatorJoystick
@@ -115,7 +115,7 @@ public class OI /* GEVALD */ {
 
 	// returns the adjusted value of the Rotate
 	// switch this to switch between the 2 drive arcade methods
-	public double getRotate() {
+	public double getRotation() {
 		return adjustInput(driverLeft.getX());
 	}
 
