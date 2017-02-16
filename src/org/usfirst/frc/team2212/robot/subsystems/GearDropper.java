@@ -18,8 +18,9 @@ public class GearDropper extends LimitedSubsystem {
 	private SpeedController motor;
 	private DigitalInput open;
 	private DigitalInput close;
-	public static final Supplier<Double> OPEN_SPEED = ConstantHandler.addConstantDouble("GEAR-DROPER-OPEN-SPEED", 0.2);
-	public static final Supplier<Double> CLOSING_SPEED = ConstantHandler.addConstantDouble("GEAR-DROPPER-CLOSING-SPEED",
+	public static final Supplier<Double> openingSpeed = ConstantHandler.addConstantDouble("GearDropper-openingSPeed",
+			0.2);
+	public static final Supplier<Double> closingSpeed = ConstantHandler.addConstantDouble("GearDropper-closingSPeed",
 			-0.2);
 
 	public GearDropper(SpeedController motor, DigitalInput open, DigitalInput close) {
