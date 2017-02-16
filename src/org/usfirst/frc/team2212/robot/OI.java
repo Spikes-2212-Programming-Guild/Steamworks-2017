@@ -59,6 +59,12 @@ public class OI /* GEVALD */ {
 		orientateAndMoveToGearButton= new JoystickButton(driverRight, 0);
 		orientToBoiler = new JoystickButton(driverRight, 1);
 		
+		switchToFrontCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(1)));
+		switchToRearCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(0)));
+	}
+	
+	// sets all commands and buttons connected to navigatorJoystick
+	private void initJoystickNavigator(){
 		dropGearButton = new JoystickButton(navigatorJoystick, 0);
 		raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 1);
 		lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
@@ -66,22 +72,6 @@ public class OI /* GEVALD */ {
 		pickFuelButton = new JoystickButton(navigatorJoystick, 4);
 		climbRopeButton = new JoystickButton(navigatorJoystick, 5);
 		
-		switchToFrontCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(1)));
-		switchToRearCameraButton.whenPressed(new RunnableCommand(()->Robot.camerasHandler.switchCamera(0)));
-	}
-	
-	// sets all commands and buttons connected to xbox driver
-	private void initXBoxDriver() { 
-		dropGearXbox = navigatorXbox.getBlueButton();
-		raiseBallBlockerXbox = navigatorXbox.getUpButton();
-		lowerBallBlockerXbox = navigatorXbox.getDownButton();
-		shootFuelXbox = navigatorXbox.getRbButton();
-		pickFuelXbox = navigatorXbox.getYellowButton();
-		climbRopeXbox = navigatorXbox.getGreenButton();
-	}
-	
-	// sets all commands connected to navigatorJoystick
-	private void initJoystickNavigator(){
 		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
 		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
 		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
@@ -92,6 +82,13 @@ public class OI /* GEVALD */ {
 
 	// sets all commands connected to navigatorXbox
 	private void initXboxNavigator(){
+		dropGearXbox = navigatorXbox.getBlueButton();
+		raiseBallBlockerXbox = navigatorXbox.getUpButton();
+		lowerBallBlockerXbox = navigatorXbox.getDownButton();
+		shootFuelXbox = navigatorXbox.getRbButton();
+		pickFuelXbox = navigatorXbox.getYellowButton();
+		climbRopeXbox = navigatorXbox.getGreenButton();
+		
 		dropGearXbox.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, 0.7));
 		raiseBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, 0.7));
 		lowerBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, -0.7));
