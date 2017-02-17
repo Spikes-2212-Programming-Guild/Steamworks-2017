@@ -22,8 +22,8 @@ public class Drivetrain extends TankDrivetrain {
 	public Drivetrain(SpeedController leftSpeedcontroller, SpeedController rightSpeedcontroller, Encoder leftEncoder,
 			Encoder rightEncoder) {
 		this.leftSpeedcontroller = leftSpeedcontroller;
-		this.leftSpeedcontroller.setInverted(true);
 		this.rightSpeedcontroller = rightSpeedcontroller;
+		this.rightSpeedcontroller.setInverted(true);
 		this.leftEncoder = leftEncoder;
 		this.rightEncoder = rightEncoder;
 		leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
