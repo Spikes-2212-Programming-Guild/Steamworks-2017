@@ -1,5 +1,4 @@
 package com.spikes2212.robot;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -21,7 +20,7 @@ public class RobotMap {
 	}
 
 	public interface PWM {
-		public static final int FEEDER = 0;// FIXME enter real port
+		public static final int FEEDER = 3;
 		public static final int GEAR_DROPPER = 1;
 		public static final int PICKER = 2;
 		public static final int BALL_BLOCKER = 4;
