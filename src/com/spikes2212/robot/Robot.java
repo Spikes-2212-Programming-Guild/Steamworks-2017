@@ -1,6 +1,7 @@
 
 package com.spikes2212.robot;
 
+import com.ctre.CANTalon;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -8,13 +9,14 @@ import com.spikes2212.robot.subsystems.Feeder;
 import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.robot.subsystems.Shooter;
+import com.spikes2212.utils.DoubleSpeedcontroller;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,18 +36,29 @@ public class Robot extends IterativeRobot {
 	public static Picker picker;
 	public static Shooter shooter;
 
-	Command autonomousCommand;
-	SendableChooser chooser;
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		drivetrain = new Drivetrain(
+				new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_LEFT_1),
+						new CANTalon(RobotMap.CAN.DRIVE_LEFT_2)),
+				new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_RIGHT_1),
+						new CANTalon(RobotMap.CAN.DRIVE_RIGHT_2)),
+				new Encoder(RobotMap.DIO.DRIVE_LEFT_ENCODER_A, RobotMap.DIO.DRIVE_LEFT_ENCODER_B),
+				new Encoder(RobotMap.DIO.DRIVE_RIGHT_ENCODER_A, RobotMap.DIO.DRIVE_RIGHT_ENCODER_B));
+		ballBlocker = new BallBlocker(new VictorSP(RobotMap.PWM.BALL_BLOCKER),
+				new DigitalInput(RobotMap.DIO.BALL_BLOCKER_DOWN), new DigitalInput(RobotMap.DIO.BALL_BLOCKER_UP));
+		climber = new Climber(new CANTalon(RobotMap.CAN.CLIMBER));
+		feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER));
+		gearDropper = new GearDropper(new VictorSP(RobotMap.PWM.GEAR_DROPPER),
+				new DigitalInput(RobotMap.DIO.GEAR_DROPPER_OPEN), new DigitalInput(RobotMap.DIO.GEAR_DROPPER_CLOSE));
+		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
+		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
+				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
-		chooser = new SendableChooser();
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+
 	}
 
 	/**
@@ -73,18 +86,6 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
 	}
 
 	/**
@@ -95,12 +96,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
 	}
 
 	/**
