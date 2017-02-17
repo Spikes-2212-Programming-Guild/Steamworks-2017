@@ -23,11 +23,11 @@ public class OI /* GEVALD */ {
         SmartDashboard.putData("Climb", new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
         SmartDashboard.putData("Feed", new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
         SmartDashboard.putData("Pick", new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
-        SmartDashboard.putData("ShootBySpeed", new ShootBySpeed(200)); // inches per second
+        SmartDashboard.putData("ShootBySpeed", new ShootBySpeed(600)); // inches per second
         SmartDashboard.putData("ShootByDistance", new ShootByDistance(ImageProcessingConstants.distanceToBoiler));
         SmartDashboard.putData("ShootLinear", new ShootLinear(ImageProcessingConstants.distanceToBoiler));
-        SmartDashboard.putData("MoveForwards", new DriveTank(Robot.drivetrain, 0.5, 0.5));
-        SmartDashboard.putData("MoveBackwards", new DriveTank(Robot.drivetrain, -0.5, -0.5));
+        SmartDashboard.putData("MoveForwards", new DriveTank(Robot.drivetrain, 0.2, 0.2));
+        SmartDashboard.putData("MoveBackwards", new DriveTank(Robot.drivetrain, -0.2, -0.2));
 
     }
 }
