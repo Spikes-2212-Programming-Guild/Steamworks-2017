@@ -1,6 +1,7 @@
 
 package com.spikes2212.robot;
 
+import com.ctre.CANTalon;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -10,16 +11,13 @@ import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import com.spikes2212.utils.DoubleSpeedcontroller;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import com.ctre.CANTalon;
 import com.spikes2212.dashboard.DashBoardController;
-import com.spikes2212.utils.DoubleSpeedcontroller;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,38 +31,42 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-    public static OI oi;
-    public static Drivetrain drivetrain;
-    public static BallBlocker ballBlocker;
-    public static Climber climber;
-    public static Feeder feeder;
-    public static GearDropper gearDropper;
-    public static Picker picker;
-    public static Shooter shooter;
-    public static DashBoardController dbc = new DashBoardController();
+	public static OI oi;
+	public static Drivetrain drivetrain;
+	public static BallBlocker ballBlocker;
+	public static Climber climber;
+	public static Feeder feeder;
+	public static GearDropper gearDropper;
+	public static Picker picker;
+	public static Shooter shooter;
+	public static DashBoardController dbc = new DashBoardController();
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
-        drivetrain = new Drivetrain(
-                new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_LEFT_1),
-                        new CANTalon(RobotMap.CAN.DRIVE_LEFT_2)),
-                new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_RIGHT_1),
-                        new CANTalon(RobotMap.CAN.DRIVE_RIGHT_2)),
-                new Encoder(10, 11), new Encoder(12, 13));
-        gearDropper = new GearDropper(new VictorSP(RobotMap.PWM.GEAR_DROPPER),
-                new DigitalInput(RobotMap.DIO.GEAR_DROPPER_OPEN), new DigitalInput(RobotMap.DIO.GEAR_DROPPER_CLOSED));
-        shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER), new Encoder(14, 15));
-        picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
-        feeder = new Feeder(
-                new DoubleSpeedcontroller(new VictorSP(RobotMap.PWM.FEEDER), new VictorSP(RobotMap.PWM.BLENDER)));
-        ballBlocker = new BallBlocker(new VictorSP(RobotMap.PWM.BALL_BLOCKER),
-                new DigitalInput(RobotMap.DIO.BALL_BLOCKER_CLOSED), new DigitalInput(RobotMap.DIO.BALL_BLOCKER_OPEN));
-        climber = new Climber(new CANTalon(RobotMap.CAN.CLIMBER));
-        oi = new OI();
-    }
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
+		drivetrain = new Drivetrain(
+				new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_LEFT_1),
+						new CANTalon(RobotMap.CAN.DRIVE_LEFT_2)),
+				new DoubleSpeedcontroller(new CANTalon(RobotMap.CAN.DRIVE_RIGHT_1),
+						new CANTalon(RobotMap.CAN.DRIVE_RIGHT_2)),
+				new Encoder(RobotMap.DIO.DRIVE_LEFT_ENCODER_A, RobotMap.DIO.DRIVE_LEFT_ENCODER_B),
+				new Encoder(RobotMap.DIO.DRIVE_RIGHT_ENCODER_A, RobotMap.DIO.DRIVE_RIGHT_ENCODER_B));
+		ballBlocker = new BallBlocker(new VictorSP(RobotMap.PWM.BALL_BLOCKER),
+				new DigitalInput(RobotMap.DIO.BALL_BLOCKER_DOWN), new DigitalInput(RobotMap.DIO.BALL_BLOCKER_UP));
+		climber = new Climber(new CANTalon(RobotMap.CAN.CLIMBER));
+		feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER));
+		gearDropper = new GearDropper(new VictorSP(RobotMap.PWM.GEAR_DROPPER),
+				new DigitalInput(RobotMap.DIO.GEAR_DROPPER_OPEN), new DigitalInput(RobotMap.DIO.GEAR_DROPPER_CLOSE));
+		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
+		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
+				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
+		oi = new OI();
+
+	}
+
 
     /**
      * This function is called once each time the robot enters Disabled mode.
@@ -77,30 +79,22 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
+        dbc.update();
     }
 
-    /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable
-     * chooser code works with the Java SmartDashboard. If you prefer the
-     * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-     * getString code to get the auto name from the text box below the Gyro
-     * <p>
-     * You can add additional auto modes by adding additional commands to the
-     * chooser code above (like the commented example) or additional comparisons
-     * to the switch structure below with additional strings & commands.
-     */
-    public void autonomousInit() {
-
-		/*
-         * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-        // schedule the autonomous command (example)
-    }
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select
+	 * between different autonomous modes using the dashboard. The sendable
+	 * chooser code works with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * getString code to get the auto name from the text box below the Gyro
+	 *
+	 * You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons
+	 * to the switch structure below with additional strings & commands.
+	 */
+	public void autonomousInit() {
+	}
 
     /**
      * This function is called periodically during autonomous
