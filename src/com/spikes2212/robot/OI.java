@@ -1,6 +1,7 @@
 package com.spikes2212.robot;
 
 
+import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
 
@@ -23,7 +24,7 @@ public class OI /* GEVALD */ {
         SmartDashboard.putData("Climb", new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
         SmartDashboard.putData("Feed", new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
         SmartDashboard.putData("Pick", new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
-        SmartDashboard.putData("ShootBySpeed", new ShootBySpeed(600)); // inches per second
+        SmartDashboard.putData("ShootBySpeed", new ShootBySpeed(ConstantHandler.addConstantDouble("shooterSpeed", 300))); // inches per second
         SmartDashboard.putData("ShootByDistance", new ShootByDistance(ImageProcessingConstants.distanceToBoiler));
         SmartDashboard.putData("ShootLinear", new ShootLinear(ImageProcessingConstants.distanceToBoiler));
         SmartDashboard.putData("MoveForwards", new DriveTank(Robot.drivetrain, 0.2, 0.2));
