@@ -2,6 +2,7 @@
 package com.spikes2212.robot;
 
 import com.ctre.CANTalon;
+import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static GearDropper gearDropper;
 	public static Picker picker;
 	public static Shooter shooter;
+	private Command feederStartupCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,6 +61,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
+		feederStartupCommand = new MoveLimitedSubsystem(feeder, () -> -Feeder.SPEED.get());
 
 	}
 
@@ -86,6 +90,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
+		feederStartupCommand.start();
 	}
 
 	/**
@@ -96,6 +101,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
+		feederStartupCommand.cancel();
 	}
 
 	/**
