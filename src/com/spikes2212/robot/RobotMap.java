@@ -12,18 +12,18 @@ public class RobotMap {
 	}
 
 	public interface CAN {
-		public static final int DRIVE_LEFT_1 = 1;
-		public static final int DRIVE_LEFT_2 = 4;
-		public static final int DRIVE_RIGHT_1 = 6;
-		public static final int DRIVE_RIGHT_2 = 2;
-		public static final int CLIMBER = 3;
-		public static final int SHOOTER = 5;
+		public static final int DRIVE_LEFT_1 = 6;
+		public static final int DRIVE_LEFT_2 = 3;
+		public static final int DRIVE_RIGHT_1 = 5;
+		public static final int DRIVE_RIGHT_2 = 1;
+		public static final int CLIMBER = 2;
+		public static final int SHOOTER = 4;
 	}
 
 	public interface PWM {
-		public static final int FEEDER = 0;// FIXME enter real port
+		public static final int FEEDER = 5;// FIXME enter real port
 		public static final int GEAR_DROPPER = 1;
-		public static final int PICKER = 2;
+		public static final int PICKER = 0;
 		public static final int BALL_BLOCKER = 4;
 	}
 
