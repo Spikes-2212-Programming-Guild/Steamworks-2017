@@ -11,7 +11,7 @@ public class ImageProcessingConstants {
 	public static final int CAMERA_HEIGHT = 360;
 	public static final double CAMERA_VIEW_ANGLE_Y = 32.0;
 	public static final double CAMERA_VIEW_ANGLE_X = 58.75;
-	public static final double BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN = 11.5;
+	public static final double BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN = 19.5;
 
 	public static final Supplier<Double> BOILER_CAMERA_ANGLE_TO_FLOOR = ConstantHandler
 			.addConstantDouble("CAMERA_ANGLE_TO_FLOOR", 20);

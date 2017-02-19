@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static DashBoardController dbc = new DashBoardController();
 
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -64,23 +63,24 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
+		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
+		dbc.addDouble("center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 
 	}
 
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+	public void disabledInit() {
 
-    /**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-     * the robot is disabled.
-     */
-    public void disabledInit() {
+	}
 
-    }
-
-    public void disabledPeriodic() {
-        Scheduler.getInstance().run();
-        dbc.update();
-    }
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+		dbc.update();
+	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -96,33 +96,33 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 	}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        dbc.update();
-        Scheduler.getInstance().run();
-    }
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		dbc.update();
+		Scheduler.getInstance().run();
+	}
 
-    public void teleopInit() {
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-    }
+	public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        dbc.update();
-    }
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		dbc.update();
+	}
 
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }
