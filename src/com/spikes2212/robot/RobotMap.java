@@ -28,14 +28,14 @@ public class RobotMap {
 	}
 
 	public interface DIO {
-		public static final int DRIVE_LEFT_ENCODER_A = 0;
-		public static final int DRIVE_LEFT_ENCODER_B = 1;
-		public static final int BALL_BLOCKER_UP = 2;
-		public static final int BALL_BLOCKER_DOWN = 3;
-		public static final int GEAR_DROPPER_OPEN = 4;
-		public static final int GEAR_DROPPER_CLOSE = 5;
-		public static final int SHOOTER_ENCODER_A = 6;
-		public static final int SHOOTER_ENCODER_B = 7;
+		public static final int DRIVE_LEFT_ENCODER_A = 6;
+		public static final int DRIVE_LEFT_ENCODER_B = 7;
+		public static final int BALL_BLOCKER_UP = 3;
+		public static final int BALL_BLOCKER_DOWN = 2;
+		public static final int GEAR_DROPPER_OPEN = 0;
+		public static final int GEAR_DROPPER_CLOSE = 1;
+		public static final int SHOOTER_ENCODER_A = 4;
+		public static final int SHOOTER_ENCODER_B = 5;
 		public static final int DRIVE_RIGHT_ENCODER_A = 8;
 		public static final int DRIVE_RIGHT_ENCODER_B = 9;
 	}
