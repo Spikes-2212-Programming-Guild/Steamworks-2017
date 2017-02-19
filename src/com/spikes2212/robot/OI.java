@@ -25,11 +25,11 @@ public class OI /* GEVALD */ {
 	// TODO CHANGE ALL SPEEDS!
 
 	// controllers
-	private Joystick driverRight = new Joystick(0);
+	private Joystick driverRight = new Joystick(2);
 	private Joystick driverLeft = new Joystick(1);
 
 	private Joystick navigatorJoystick = new Joystick(2);
-	private XboXUID navigatorXbox = new XboXUID(3);
+	private XboXUID navigatorXbox = new XboXUID(0);
 
 	// driverRight buttons TODO maybe there are more buttons
 	private Button switchToFrontCameraButton;
@@ -56,16 +56,15 @@ public class OI /* GEVALD */ {
 	// constructor
 	public OI() {
 		initJoystickDriver();
-		initJoystickNavigator();
 		initXboxNavigator();
 	}
 
 	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
-		switchToFrontCameraButton = new JoystickButton(driverRight, 3);
-		switchToRearCameraButton = new JoystickButton(driverRight, 4);
-		orientateAndMoveToGearButton = new JoystickButton(driverRight, 0);
-		orientToBoiler = new JoystickButton(driverRight, 1);
+		switchToFrontCameraButton = new JoystickButton(driverRight, 4);
+		switchToRearCameraButton = new JoystickButton(driverRight, 5);
+		orientateAndMoveToGearButton = new JoystickButton(driverRight, 3);
+		orientToBoiler = new JoystickButton(driverRight, 2);
 		
 		switchToFrontCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(1)));
 		switchToRearCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(0)));
