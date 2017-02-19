@@ -9,14 +9,18 @@ import com.spikes2212.robot.subsystems.Feeder;
 import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.robot.subsystems.Shooter;
-import com.spikes2212.utils.DoubleSpeedcontroller;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import com.spikes2212.utils.DoubleSpeedcontroller;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import com.spikes2212.dashboard.DashBoardController;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +39,7 @@ public class Robot extends IterativeRobot {
 	public static GearDropper gearDropper;
 	public static Picker picker;
 	public static Shooter shooter;
+	public static DashBoardController dbc = new DashBoardController();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,6 +63,8 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
+		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
+		dbc.addDouble("center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 
 	}
 
@@ -72,6 +79,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
@@ -92,10 +100,15 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		dbc.update();
 		Scheduler.getInstance().run();
 	}
 
 	public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
 	}
 
 	/**
@@ -103,6 +116,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
