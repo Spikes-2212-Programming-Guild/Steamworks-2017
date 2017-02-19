@@ -11,11 +11,11 @@ import com.spikes2212.robot.subsystems.Shooter;
  */
 public class ShootBySpeed extends MoveLimitedSubsystemWithPID {
 
-	public ShootBySpeed(Supplier<Double> wantedSpeed) {
-		this(wantedSpeed.get());
+	public ShootBySpeed(double wantedSpeed) {
+		this(() -> wantedSpeed);
 	}
 
-	public ShootBySpeed(double wantedSpeed) {
+	public ShootBySpeed(Supplier<Double> wantedSpeed) {
 		super(Robot.shooter, wantedSpeed, Shooter.KP.get(), Shooter.KI.get(), Shooter.KD.get(), 0);
 	}
 
