@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.ctre.CANTalon;
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
+import com.spikes2212.robot.Robot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -31,6 +32,7 @@ public class Shooter extends LimitedSubsystem {
 		this.encoder = encoder;
 		this.motor = motor;
 		motor.setInverted(true);
+		Robot.dbc.addDouble("Speed", encoder::getRate);
 		speed = 0;
 	}
 
