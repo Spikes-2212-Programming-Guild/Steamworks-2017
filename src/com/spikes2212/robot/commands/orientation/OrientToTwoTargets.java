@@ -19,10 +19,10 @@ public class OrientToTwoTargets extends CommandGroup {
 	public static final Supplier<Double> TOLERANCE = ConstantHandler.addConstantDouble("OrientToTwoObjects-TOLERANCE",
 			0);
 
-	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier, double KP, double KI, double KD, double tolerance) {
+	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier) {
 		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
-		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource, rightOrientationSource, 0, 0, KP,
-				KI, KD, tolerance));
+		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource, rightOrientationSource, 0, 0,
+				KP.get(), KI.get(), KD.get(), TOLERANCE.get()));
 	}
 
 	private static PIDSource leftOrientationSource = new PIDSource() {

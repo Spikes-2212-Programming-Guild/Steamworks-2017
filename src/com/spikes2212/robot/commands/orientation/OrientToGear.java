@@ -18,8 +18,7 @@ public class OrientToGear extends CommandGroup {
 	public OrientToGear(Supplier<Double> turningSpeed) {
 		addSequential(new RunnableCommand(
 				() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera", GEAR_CAMERA_ID.get())));
-		addSequential(new OrientToTwoTargets(turningSpeed, OrientToTwoTargets.KP.get(), OrientToTwoTargets.KI.get(),
-				OrientToTwoTargets.KD.get(), OrientToTwoTargets.TOLERANCE.get()));
+		addSequential(new OrientToTwoTargets(turningSpeed));
 	}
 
 }
