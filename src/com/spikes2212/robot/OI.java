@@ -3,6 +3,7 @@ package com.spikes2212.robot;
 import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTank;
+import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
 import com.spikes2212.robot.commands.orientation.OrientToGear;
 import com.spikes2212.robot.commands.orientation.OrientToTwoTargets;
@@ -16,6 +17,7 @@ import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.utils.RunnableCommand;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -23,6 +25,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI /* GEVALD */ {
+	public final Joystick j = new Joystick(0);
+
 	public OI() {
 		SmartDashboard.putData("move-BallBlocker-up",
 				new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
@@ -43,13 +47,24 @@ public class OI /* GEVALD */ {
 		SmartDashboard.putData("ShootLinear", new ShootLinear(ImageProcessingConstants.distanceToBoiler));
 		SmartDashboard.putData("MoveForwards", new DriveTank(Robot.drivetrain, 0.2, 0.2));
 		SmartDashboard.putData("MoveBackwards", new DriveTank(Robot.drivetrain, -0.2, -0.2));
-		SmartDashboard.putData("Orient Left", new OrientToTwoTargets(() -> 0.4));
-		SmartDashboard.putData("Orient Right", new OrientToTwoTargets(() -> -0.4));
+		SmartDashboard.putData("OrientGears", new OrientateAndMoveToGear(this::getRotation, this::getForward));
 		SmartDashboard.putData("Change to Boiler Camera",
 				new RunnableCommand(() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera",
 						OrientToBoiler.BOILER_CAMERA_ID.get())));
 		SmartDashboard.putData("Change to Gear Camera", new RunnableCommand(() -> ImageProcessingConstants.NETWORK_TABLE
 				.putNumber("currentCamera", OrientToGear.GEAR_CAMERA_ID.get())));
 
+	}
+
+	public static double adjustInput(double value) {
+		return Math.abs(value) * value;
+	}
+
+	public double getRotation() {
+		return adjustInput(-j.getX());
+	}
+
+	public double getForward() {
+		return adjustInput(-j.getY());
 	}
 }
