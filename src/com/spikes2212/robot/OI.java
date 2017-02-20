@@ -1,6 +1,7 @@
 package com.spikes2212.robot;
 
 import com.spikes2212.robot.commands.FeedAndShootByDistance;
+import com.spikes2212.robot.commands.FeedAndShootLinear;
 import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
 import com.spikes2212.robot.subsystems.BallBlocker;
@@ -81,10 +82,10 @@ public class OI /* GEVALD */ {
 		pickFuelButton = new JoystickButton(navigatorJoystick, 5);
 		climbRopeButton = new JoystickButton(navigatorJoystick, 6);
 
-		dropGearButton.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
+		dropGearButton.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
 		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
 		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
-		shootFuelButton.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
+		shootFuelButton.whileHeld(new FeedAndShootLinear(ImageProcessingConstants.distanceToBoiler));
 		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
 		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 	}
@@ -98,12 +99,12 @@ public class OI /* GEVALD */ {
 		pickFuelXbox = navigatorXbox.getRtButton();
 		climbRopeXbox = navigatorXbox.getLtButton();
 
-		dropGearXbox.whenPressed(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
-		raiseBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
-		lowerBallBlockerXbox.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
-		shootFuelXbox.whileHeld(new FeedAndShootByDistance(ImageProcessingConstants.distanceToBoiler));
-		pickFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
-		climbRopeXbox.whenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
+		dropGearXbox.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
+		raiseBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
+		lowerBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
+		shootFuelXbox.toggleWhenPressed(new FeedAndShootLinear(ImageProcessingConstants.distanceToBoiler));
+		pickFuelXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
+		climbRopeXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 	}
 
 	// receives input, returns the adjusted input for better sensitivity
@@ -114,16 +115,16 @@ public class OI /* GEVALD */ {
 	// returns the adjusted value of the Rotate
 	// switch this to switch between the 2 drive arcade methods
 	public double getRotation() {
-		return adjustInput(driverLeft.getX());
+		return adjustInput(-driverLeft.getX());
 	}
 
 	// returns the adjusted value of the driving right joystick's y
 	public double getForwardRight() {
-		return adjustInput(driverRight.getY());
+		return adjustInput(-driverRight.getY());
 	}
 
 	// returns the adjusted value of the driving left joystick's y
 	public double getForwardLeft() {
-		return adjustInput(driverLeft.getY());
+		return adjustInput(-driverLeft.getY());
 	}
 }
