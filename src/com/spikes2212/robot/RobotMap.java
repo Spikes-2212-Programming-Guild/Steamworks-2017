@@ -22,6 +22,7 @@ public class RobotMap {
 
 	public interface PWM {
 		public static final int FEEDER = 3;
+		public static final int BLENDER = 2;// part of the feeder subsystem
 		public static final int GEAR_DROPPER = 1;
 		public static final int PICKER = 0;
 		public static final int BALL_BLOCKER = 4;

@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
 		ballBlocker = new BallBlocker(new VictorSP(RobotMap.PWM.BALL_BLOCKER),
 				new DigitalInput(RobotMap.DIO.BALL_BLOCKER_DOWN), new DigitalInput(RobotMap.DIO.BALL_BLOCKER_UP));
 		climber = new Climber(new CANTalon(RobotMap.CAN.CLIMBER));
-		feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER));
+		feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER), new VictorSP(RobotMap.PWM.BLENDER));
 		gearDropper = new GearDropper(new VictorSP(RobotMap.PWM.GEAR_DROPPER),
 				new DigitalInput(RobotMap.DIO.GEAR_DROPPER_OPEN), new DigitalInput(RobotMap.DIO.GEAR_DROPPER_CLOSE));
 		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
