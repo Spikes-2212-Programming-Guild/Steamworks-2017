@@ -8,12 +8,14 @@ import com.spikes2212.robot.commands.shooting.ShootBySpeed;
 import com.spikes2212.robot.subsystems.Feeder;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class FeedAndShootBySpeed extends CommandGroup {
 
 	public FeedAndShootBySpeed(Supplier<Double> wantedSpeed) {
-		addParallel(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
-		addSequential(new ShootBySpeed(wantedSpeed));
+		addParallel(new ShootBySpeed(wantedSpeed));
+		addSequential(new WaitCommand(FeedAndShootByDistance.WAIT_TIME.get()));
+		addSequential(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
 	}
 
 	public FeedAndShootBySpeed(double wantedSpeed) {

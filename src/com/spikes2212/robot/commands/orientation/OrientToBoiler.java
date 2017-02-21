@@ -6,6 +6,7 @@ import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.robot.ImageProcessingConstants;
 import com.spikes2212.utils.RunnableCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -18,5 +19,6 @@ public class OrientToBoiler extends CommandGroup {
 		addSequential(new RunnableCommand(
 				() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera", BOILER_CAMERA_ID.get())));
 		addSequential(new OrientToTwoTargets(turningSpeed));
+		addSequential(new WaitCommand(0.3));
 	}
 }
