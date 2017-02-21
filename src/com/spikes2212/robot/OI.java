@@ -4,14 +4,15 @@ import com.spikes2212.robot.commands.FeedAndShootByDistance;
 import com.spikes2212.robot.commands.FeedAndShootLinear;
 import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
+import com.spikes2212.robot.commands.shooting.ShootLinear;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
+import com.spikes2212.robot.subsystems.Feeder;
 import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
@@ -33,8 +34,8 @@ public class OI /* GEVALD */ {
 	private XboXUID navigatorXbox = new XboXUID(0);
 
 	// driverRight buttons TODO maybe there are more buttons
-	private Button switchToFrontCameraButton;
 	private Button switchToRearCameraButton;
+	private Button switchToFrontCameraButton;
 	private Button orientateAndMoveToGearButton;
 	private Button orientToBoiler;
 
@@ -53,6 +54,7 @@ public class OI /* GEVALD */ {
 	private Button shootFuelXbox;
 	private Button pickFuelXbox;
 	private Button climbRopeXbox;
+	private Button feedFuelXbox;
 
 	// constructor
 	public OI() {
@@ -62,13 +64,13 @@ public class OI /* GEVALD */ {
 
 	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
-		switchToFrontCameraButton = new JoystickButton(driverLeft, 4);
-		switchToRearCameraButton = new JoystickButton(driverLeft, 5);
+		switchToRearCameraButton = new JoystickButton(driverLeft, 2);//Rear is picker
+		switchToFrontCameraButton = new JoystickButton(driverLeft, 3);//Front is gears
 		orientateAndMoveToGearButton = new JoystickButton(driverRight, 3);
 		orientToBoiler = new JoystickButton(driverRight, 2);
-		
-		switchToFrontCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(1)));
-		switchToRearCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(0)));
+
+		switchToRearCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(1)));
+		switchToFrontCameraButton.whenPressed(new RunnableCommand(() -> Robot.camerasHandler.switchCamera(0)));
 		orientateAndMoveToGearButton.whileHeld(new OrientateAndMoveToGear(this::getRotation, this::getForwardRight));
 		orientToBoiler.whileHeld(new OrientToBoiler(this::getRotation));
 	}
@@ -98,13 +100,15 @@ public class OI /* GEVALD */ {
 		shootFuelXbox = navigatorXbox.getGreenButton();
 		pickFuelXbox = navigatorXbox.getRtButton();
 		climbRopeXbox = navigatorXbox.getLtButton();
+		feedFuelXbox = navigatorXbox.getBlueButton();
 
 		dropGearXbox.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
 		raiseBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
 		lowerBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
-		shootFuelXbox.toggleWhenPressed(new FeedAndShootLinear(ImageProcessingConstants.distanceToBoiler));
+		shootFuelXbox.toggleWhenPressed(new ShootLinear(ImageProcessingConstants.distanceToBoiler));
 		pickFuelXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
 		climbRopeXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
+		feedFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
 	}
 
 	// receives input, returns the adjusted input for better sensitivity
