@@ -1,8 +1,11 @@
 
 package com.spikes2212.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+
+import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -42,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public static Picker picker;
 	public static Shooter shooter;
 	public static CamerasHandler camerasHandler;
+	public static DashBoardController dbc = new DashBoardController();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -64,6 +68,8 @@ public class Robot extends IterativeRobot {
 		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
+		camerasHandler = new CamerasHandler(160, 120, 0, 1);
+		dbc.addDouble("Center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 		oi = new OI();
 
 	}
@@ -79,6 +85,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
@@ -100,6 +107,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	public void teleopInit() {
@@ -110,6 +118,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
