@@ -6,10 +6,12 @@ import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.drivetrains.commands.DriveTankWithPID;
 import com.spikes2212.robot.ImageProcessingConstants;
 import com.spikes2212.robot.Robot;
+import com.spikes2212.utils.RunnableCommand;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OrientToTwoTargets extends CommandGroup {
 
@@ -20,9 +22,11 @@ public class OrientToTwoTargets extends CommandGroup {
 			0);
 
 	public OrientToTwoTargets(Supplier<Double> rotateSpeedSupplier) {
+		addSequential(new RunnableCommand(() -> SmartDashboard.putBoolean("Oriented", false)));
 		addSequential(new TurnToTwoTargets(rotateSpeedSupplier));
 		addSequential(new DriveTankWithPID(Robot.drivetrain, leftOrientationSource, rightOrientationSource, 0, 0,
 				KP.get(), KI.get(), KD.get(), TOLERANCE.get()));
+		addSequential(new RunnableCommand(() -> SmartDashboard.putBoolean("Oriented", true)));
 	}
 
 	private static PIDSource leftOrientationSource = new PIDSource() {
