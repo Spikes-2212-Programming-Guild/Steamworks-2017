@@ -62,8 +62,8 @@ public class OI /* GEVALD */ {
 
 	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
-		switchToFrontCameraButton = new JoystickButton(driverRight, 4);
-		switchToRearCameraButton = new JoystickButton(driverRight, 5);
+		switchToFrontCameraButton = new JoystickButton(driverLeft, 4);
+		switchToRearCameraButton = new JoystickButton(driverLeft, 5);
 		orientateAndMoveToGearButton = new JoystickButton(driverRight, 3);
 		orientToBoiler = new JoystickButton(driverRight, 2);
 		
@@ -120,7 +120,7 @@ public class OI /* GEVALD */ {
 
 	// returns the adjusted value of the driving right joystick's y
 	public double getForwardRight() {
-		return adjustInput(-driverRight.getY());
+		return adjustInput(driverRight.getY());
 	}
 
 	// returns the adjusted value of the driving left joystick's y
