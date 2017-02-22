@@ -19,13 +19,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MoveStraightAndDropGearAuto extends CommandGroup {
 	// Do not forget, gears is BACKWARDS
 	public static final Supplier<Double> movingSpeed = ConstantHandler
-			.addConstantDouble("MoveStraightAndDropGearAuto-movingSpeed", -0.4);
+			.addConstantDouble("MoveStraightAndDropGearAuto-movingSpeed", -0.3);
 	public static final Supplier<Double> movingTime = ConstantHandler
 			.addConstantDouble("MoveStraightAndDropGearAuto-movingTime", 3);
 	public static final Supplier<Double> afterOrientionTime = ConstantHandler
-			.addConstantDouble("MoveStraightAndDropGearAuto-afterOrientionTime", 3);
+			.addConstantDouble("MoveStraightAndDropGearAuto-afterOrientionTime", 1.5);
 	public static final Supplier<Double> reverseTime = ConstantHandler
-			.addConstantDouble("MoveStraightAndDropGearAuto-reverseTime", 1.5);
+			.addConstantDouble("MoveStraightAndDropGearAuto-reverseTime", 0.3);
 	public static final Supplier<Double> reverseSpeed = ConstantHandler
 			.addConstantDouble("MoveStraightAndDropGearAuto-reverseSpeed", 0.3);
 
