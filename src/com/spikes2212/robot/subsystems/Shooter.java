@@ -15,12 +15,12 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  */
 public class Shooter extends LimitedSubsystem {
 
-	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.01);
+	public static final Supplier<Double> acceleration = ConstantHandler.addConstantDouble("Shooter-acceleration", 0.02);
 	private CANTalon motor;
 	private Encoder encoder;
-	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 1);
-	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 0.1);
-	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.1);
+	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 1.2);
+	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 5);
+	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.05);
 	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 20; // 20 pulses per revolution,4 inch wheel
 
 	private double speed;

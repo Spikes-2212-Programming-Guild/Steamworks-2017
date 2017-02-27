@@ -14,7 +14,7 @@ public class ImageProcessingConstants {
 	public static final double BOILER_CAMERA_HEIGHT_FROM_FLOOR_IN = 19.5;
 
 	public static final Supplier<Double> BOILER_CAMERA_ANGLE_TO_FLOOR = ConstantHandler
-			.addConstantDouble("CAMERA_ANGLE_TO_FLOOR", 20);
+			.addConstantDouble("CAMERA_ANGLE_TO_FLOOR", 13.8);
 
 	public static final NetworkTable NETWORK_TABLE = NetworkTable.getTable("ImageProcessing");
 

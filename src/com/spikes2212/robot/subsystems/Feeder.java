@@ -15,9 +15,9 @@ public class Feeder extends LimitedSubsystem {
 
 	private SpeedController motor;
 	private SpeedController blender;
-	public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Feeder-SPEED", 0.1);
+	public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Feeder-SPEED", 0.75);
 	public static final Supplier<Double> BLENDER_SPEED = ConstantHandler.addConstantDouble("Feeder-BLENDER_SPEED",
-			0.31);
+			0.25);
 
 	public Feeder(SpeedController motor, SpeedController blender) {
 		this.motor = motor;
