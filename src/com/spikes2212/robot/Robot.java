@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public static GearDropper gearDropper;
 	public static Picker picker;
 	public static Shooter shooter;
-	private Command feederStartupCommand;
+	private Command pickerStartupCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
-		feederStartupCommand = new MoveLimitedSubsystem(feeder, () -> -Feeder.SPEED.get());
+		pickerStartupCommand = new MoveLimitedSubsystem(picker, () -> -Picker.SPEED.get());
 
 	}
 
@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
-		feederStartupCommand.start();
+		pickerStartupCommand.start();
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		feederStartupCommand.cancel();
+		pickerStartupCommand.cancel();
 	}
 
 	/**
