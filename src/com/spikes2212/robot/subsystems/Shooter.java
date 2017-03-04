@@ -21,7 +21,9 @@ public class Shooter extends LimitedSubsystem {
 	public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("Shooter KP", 1);
 	public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("Shooter KI", 0.1);
 	public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("Shooter KD", 0.1);
-	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 20; // 20 pulses per revolution,4 inch wheel
+	public static final Supplier<Double> SHORT_RANGE_SHOOTING_SPEED = ConstantHandler
+			.addConstantDouble("Shooter - SHORT RANGE SHOOTING SPEED", 200);
+	public static final double DISTANCE_PER_PULSE = 4 * Math.PI / 20; // 20 pulses per revolution, 4 inch wheel
 
 	private double speed;
 

@@ -4,12 +4,15 @@ import com.spikes2212.robot.commands.FeedAndShootByDistance;
 import com.spikes2212.robot.commands.FeedAndShootLinear;
 import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
+import com.spikes2212.robot.commands.shooting.ShootBySpeed;
 import com.spikes2212.robot.commands.shooting.ShootLinear;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Feeder;
 import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
+import com.spikes2212.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -55,6 +58,7 @@ public class OI /* GEVALD */ {
 	private Button pickFuelXbox;
 	private Button climbRopeXbox;
 	private Button feedFuelXbox;
+	private Button shortRangeShootXbox;
 
 	// constructor
 	public OI() {
@@ -101,6 +105,7 @@ public class OI /* GEVALD */ {
 		pickFuelXbox = navigatorXbox.getRtButton();
 		climbRopeXbox = navigatorXbox.getLtButton();
 		feedFuelXbox = navigatorXbox.getBlueButton();
+		shortRangeShootXbox = navigatorXbox.getRedButton();
 
 		dropGearXbox.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
 		raiseBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
@@ -109,6 +114,7 @@ public class OI /* GEVALD */ {
 		pickFuelXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
 		climbRopeXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 		feedFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
+		shortRangeShootXbox.toggleWhenPressed(new ShootBySpeed(Shooter.SHORT_RANGE_SHOOTING_SPEED));
 	}
 
 	// receives input, returns the adjusted input for better sensitivity
