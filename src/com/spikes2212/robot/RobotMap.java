@@ -1,5 +1,4 @@
 package com.spikes2212.robot;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -12,11 +11,11 @@ public class RobotMap {
 	}
 
 	public interface CAN {
-		public static final int DRIVE_LEFT_1 = 6;
+		public static final int DRIVE_LEFT_1 = 5;
 		public static final int DRIVE_LEFT_2 = 3;
-		public static final int DRIVE_RIGHT_1 = 5;
-		public static final int DRIVE_RIGHT_2 = 1;
-		public static final int CLIMBER = 2;
+		public static final int DRIVE_RIGHT_1 = 6;
+		public static final int DRIVE_RIGHT_2 = 2;
+		public static final int CLIMBER = 1;
 		public static final int SHOOTER = 4;
 	}
 

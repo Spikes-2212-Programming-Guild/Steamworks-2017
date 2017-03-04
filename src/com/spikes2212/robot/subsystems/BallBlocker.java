@@ -24,7 +24,6 @@ public class BallBlocker extends LimitedSubsystem {
 		this.up = up;
 		this.down = down;
 		this.motor = motor;
-		motor.setInverted(true);
 	}
 
 	@Override
