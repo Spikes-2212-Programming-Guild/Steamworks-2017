@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -70,6 +71,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Gears Straight", new MoveStraightAndDropGearAuto());
 		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
 		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
+		SmartDashboard.putData("Auto", autoChooser);
 	}
 
 	/**
