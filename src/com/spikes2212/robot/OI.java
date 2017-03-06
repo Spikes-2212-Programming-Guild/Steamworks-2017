@@ -4,6 +4,7 @@ import com.spikes2212.robot.commands.FeedAndShootByDistance;
 import com.spikes2212.robot.commands.FeedAndShootLinear;
 import com.spikes2212.robot.commands.OrientateAndMoveToGear;
 import com.spikes2212.robot.commands.orientation.OrientToBoiler;
+import com.spikes2212.robot.commands.shooting.ShootBySpeed;
 import com.spikes2212.robot.commands.shooting.ShootLinear;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 import com.spikes2212.utils.RunnableCommand;
 import com.spikes2212.utils.XboXUID;
@@ -105,7 +107,7 @@ public class OI /* GEVALD */ {
 		dropGearXbox.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
 		raiseBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
 		lowerBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
-		shootFuelXbox.toggleWhenPressed(new ShootLinear(ImageProcessingConstants.distanceToBoiler));
+		shootFuelXbox.toggleWhenPressed(new ShootBySpeed(ConstantHandler.addConstantDouble("wantedSpeed", 1100)));
 		pickFuelXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
 		climbRopeXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 		feedFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
