@@ -2,6 +2,11 @@
 package com.spikes2212.robot;
 
 import com.ctre.CANTalon;
+import com.spikes2212.dashboard.DashBoardController;
+import com.spikes2212.robot.commands.autonomous.MoveStraightAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnLeftAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnRightAndDropGearAuto;
+import com.spikes2212.robot.commands.orientation.TurnToTwoTargets;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -15,8 +20,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +42,8 @@ public class Robot extends IterativeRobot {
 	public static GearDropper gearDropper;
 	public static Picker picker;
 	public static Shooter shooter;
+	public static DashBoardController dbc = new DashBoardController();
+	private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,7 +67,9 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
 		oi = new OI();
-
+		autoChooser.addDefault("Gears Straight", new MoveStraightAndDropGearAuto());
+		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
+		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
 	}
 
 	/**
@@ -72,6 +83,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
@@ -86,6 +98,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
+		autoChooser.getSelected().start();
 	}
 
 	/**
@@ -93,9 +106,11 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	public void teleopInit() {
+		autoChooser.getSelected().cancel();
 	}
 
 	/**
@@ -103,6 +118,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		dbc.update();
 	}
 
 	/**
