@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Picker extends LimitedSubsystem {
 
-	public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Picker-SPEED", 0.8);
+	public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Picker-SPEED", 0.75);
 
 	private SpeedController motor;
 

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class OrientToGear extends CommandGroup {
 
 	public static final Supplier<Double> GEAR_CAMERA_ID = ConstantHandler.addConstantDouble("OrientToGear-CAMERA_ID",
-			0);
+			1);
 
 	public OrientToGear(Supplier<Double> turningSpeed) {
 		addSequential(new RunnableCommand(
