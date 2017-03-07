@@ -6,6 +6,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 
 import com.spikes2212.dashboard.DashBoardController;
+import com.spikes2212.dashboard.DashBoardController;
+import com.spikes2212.robot.commands.autonomous.MoveStraightAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnLeftAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnRightAndDropGearAuto;
+import com.spikes2212.robot.commands.orientation.TurnToTwoTargets;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -15,6 +20,8 @@ import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.robot.subsystems.Shooter;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
@@ -46,6 +53,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static CamerasHandler camerasHandler;
 	public static DashBoardController dbc = new DashBoardController();
+	private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -72,7 +80,10 @@ public class Robot extends IterativeRobot {
 		dbc.addDouble("Center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
 		oi = new OI();
-
+		autoChooser.addDefault("Gears Straight", new MoveStraightAndDropGearAuto());
+		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
+		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
+		SmartDashboard.putData("Auto", autoChooser);
 	}
 
 	/**
@@ -101,6 +112,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
+		autoChooser.getSelected().start();
 	}
 
 	/**
@@ -112,6 +124,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
+		autoChooser.getSelected().cancel();
 	}
 
 	/**
