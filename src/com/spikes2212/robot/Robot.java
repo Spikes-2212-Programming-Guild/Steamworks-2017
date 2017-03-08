@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
-		camerasHandler = new CamerasHandler(160, 120, 0, 1);
+		camerasHandler = new CamerasHandler(160*2, 120*2, 0, 1);
 		dbc.addDouble("Center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
 		dbc.addBoolean("Gear Closed", gearDropper::isMin);
