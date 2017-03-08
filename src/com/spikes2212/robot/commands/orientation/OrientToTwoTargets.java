@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OrientToTwoTargets extends CommandGroup {
 
     public static final Supplier<Double> KP = ConstantHandler.addConstantDouble("OrientToTwoObjects-KP", 1.8);
-    public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("OrientToTwoObjects-KI", 0.05);
+    public static final Supplier<Double> KI = ConstantHandler.addConstantDouble("OrientToTwoObjects-KI", 0.055);
     public static final Supplier<Double> KD = ConstantHandler.addConstantDouble("OrientToTwoObjects-KD", 0);
     public static final Supplier<Double> TOLERANCE = ConstantHandler.addConstantDouble("OrientToTwoObjects-TOLERANCE",
             0.05);
