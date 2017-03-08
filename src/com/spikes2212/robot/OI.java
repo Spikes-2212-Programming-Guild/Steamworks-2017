@@ -66,8 +66,11 @@ public class OI /* GEVALD */ {
 
 	// sets all commands and buttons connected to joystick driver
 	private void initJoystickDriver() {
-		switchToRearCameraButton = new JoystickButton(driverLeft, 2);//Rear is picker
-		switchToFrontCameraButton = new JoystickButton(driverLeft, 3);//Front is gears
+		switchToRearCameraButton = new JoystickButton(driverLeft, 2);// Rear is
+																		// picker
+		switchToFrontCameraButton = new JoystickButton(driverLeft, 3);// Front
+																		// is
+																		// gears
 		orientateAndMoveToGearButton = new JoystickButton(driverRight, 3);
 		orientToBoiler = new JoystickButton(driverRight, 2);
 
@@ -78,21 +81,27 @@ public class OI /* GEVALD */ {
 	}
 
 	// sets all commands and buttons connected to navigatorJoystick
-	private void initJoystickNavigator() {
-		dropGearButton = new JoystickButton(navigatorJoystick, 4);
-		raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 3);
-		lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
-		shootFuelButton = new JoystickButton(navigatorJoystick, 1);
-		pickFuelButton = new JoystickButton(navigatorJoystick, 5);
-		climbRopeButton = new JoystickButton(navigatorJoystick, 6);
-
-		dropGearButton.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper, GearDropper.OPENING_SPEED));
-		raiseBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
-		lowerBallBlockerButton.whileHeld(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
-		shootFuelButton.whileHeld(new FeedAndShootLinear(ImageProcessingConstants.distanceToBoiler));
-		pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
-		climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
-	}
+	// private void initJoystickNavigator() {
+	// dropGearButton = new JoystickButton(navigatorJoystick, 4);
+	// raiseBallBlockerButton = new JoystickButton(navigatorJoystick, 3);
+	// lowerBallBlockerButton = new JoystickButton(navigatorJoystick, 2);
+	// shootFuelButton = new JoystickButton(navigatorJoystick, 1);
+	// pickFuelButton = new JoystickButton(navigatorJoystick, 5);
+	// climbRopeButton = new JoystickButton(navigatorJoystick, 6);
+	//
+	// dropGearButton.whileHeld(new MoveLimitedSubsystem(Robot.gearDropper,
+	// GearDropper.OPENING_SPEED));
+	// raiseBallBlockerButton.whileHeld(new
+	// MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.UP_SPEED));
+	// lowerBallBlockerButton.whileHeld(new
+	// MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
+	// shootFuelButton.whileHeld(new
+	// FeedAndShootLinear(ImageProcessingConstants.distanceToBoiler));
+	// pickFuelButton.whileHeld(new MoveLimitedSubsystem(Robot.picker,
+	// Picker.SPEED));
+	// climbRopeButton.whenPressed(new MoveLimitedSubsystem(Robot.climber,
+	// Climber.SPEED));
+	// }
 
 	// sets all commands connected to navigatorXbox
 	private void initXboxNavigator() {
@@ -109,7 +118,7 @@ public class OI /* GEVALD */ {
 		lowerBallBlockerXbox.whenPressed(new MoveLimitedSubsystem(Robot.ballBlocker, BallBlocker.DOWN_SPEED));
 		shootFuelXbox.toggleWhenPressed(new ShootBySpeed(ConstantHandler.addConstantDouble("wantedSpeed", 1100)));
 		pickFuelXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.picker, Picker.SPEED));
-		climbRopeXbox.toggleWhenPressed(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
+		climbRopeXbox.whileHeld(new MoveLimitedSubsystem(Robot.climber, Climber.SPEED));
 		feedFuelXbox.whileHeld(new MoveLimitedSubsystem(Robot.feeder, Feeder.SPEED));
 	}
 
