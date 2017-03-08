@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.robot.commands.autonomous.MoveStraightAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveStraightAuto;
 import com.spikes2212.robot.commands.autonomous.MoveTurnLeftAndDropGearAuto;
 import com.spikes2212.robot.commands.autonomous.MoveTurnRightAndDropGearAuto;
 import com.spikes2212.robot.commands.orientation.TurnToTwoTargets;
@@ -84,6 +85,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("Gears Straight", new MoveStraightAndDropGearAuto());
 		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
 		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
+		autoChooser.addObject("Straight", new MoveStraightAuto());
 		SmartDashboard.putData("Auto", autoChooser);
 	}
 
