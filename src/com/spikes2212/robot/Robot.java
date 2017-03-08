@@ -79,6 +79,7 @@ public class Robot extends IterativeRobot {
 		camerasHandler = new CamerasHandler(160, 120, 0, 1);
 		dbc.addDouble("Center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
+		dbc.addBoolean("Gear Closed", gearDropper::isMin);
 		oi = new OI();
 		autoChooser.addDefault("Gears Straight", new MoveStraightAndDropGearAuto());
 		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
