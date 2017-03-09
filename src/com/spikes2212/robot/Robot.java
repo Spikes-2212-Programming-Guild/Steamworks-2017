@@ -89,6 +89,7 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
 		autoChooser.addObject("Straight", new MoveStraightAuto());
 		SmartDashboard.putData("Auto", autoChooser);
+		SmartDashboard.putBoolean("Oriented", false);
 	}
 
 	/**
