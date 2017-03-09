@@ -24,6 +24,7 @@ import com.spikes2212.utils.DoubleSpeedcontroller;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -55,6 +56,7 @@ public class Robot extends IterativeRobot {
 	public static CamerasHandler camerasHandler;
 	public static DashBoardController dbc = new DashBoardController();
 	private SendableChooser<Command> autoChooser = new SendableChooser<>();
+	private int counter = 0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -77,7 +79,7 @@ public class Robot extends IterativeRobot {
 		picker = new Picker(new VictorSP(RobotMap.PWM.PICKER));
 		shooter = new Shooter(new CANTalon(RobotMap.CAN.SHOOTER),
 				new Encoder(RobotMap.DIO.SHOOTER_ENCODER_A, RobotMap.DIO.SHOOTER_ENCODER_B));
-		camerasHandler = new CamerasHandler(160*2, 120*2, 0, 1);
+		camerasHandler = new CamerasHandler(160 * 2, 120 * 2, 0, 1);
 		dbc.addDouble("Center", ImageProcessingConstants.TWO_OBJECTS_CENTER);
 		dbc.addDouble("Distance", ImageProcessingConstants.distanceToBoiler);
 		dbc.addBoolean("Gear Closed", gearDropper::isMin);
@@ -122,6 +124,12 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
+		counter++;
+		counter = counter % 7;
+		if (counter == 0) {
+			System.out.println("Orientation: " + ImageProcessingConstants.TWO_OBJECTS_CENTER.get() + "Time: "
+					+ Timer.getMatchTime());
+		}
 		Scheduler.getInstance().run();
 		dbc.update();
 	}
