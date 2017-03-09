@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.PIDSource;
 
 public class Climber extends LimitedSubsystem {
     private CANTalon motor;
-    public static final Supplier<Double> MAX_CURRENT = ConstantHandler.addConstantDouble("Climber-MAX_CURRENT", 25);
-    public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Climber-SPEED", 0.7);
+    public static final Supplier<Double> MAX_CURRENT = ConstantHandler.addConstantDouble("Climber-MAX_CURRENT", 35);
+    public static final Supplier<Double> SPEED = ConstantHandler.addConstantDouble("Climber-SPEED", 1);
 
     public Climber(CANTalon motor) {
         this.motor = motor;
