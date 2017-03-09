@@ -5,12 +5,15 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 
+import com.spikes2212.dashboard.ConstantHandler;
 import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.dashboard.DashBoardController;
 import com.spikes2212.robot.commands.autonomous.MoveStraightAndDropGearAuto;
 import com.spikes2212.robot.commands.autonomous.MoveStraightAuto;
 import com.spikes2212.robot.commands.autonomous.MoveTurnLeftAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnLeftAuto;
 import com.spikes2212.robot.commands.autonomous.MoveTurnRightAndDropGearAuto;
+import com.spikes2212.robot.commands.autonomous.MoveTurnRightAuto;
 import com.spikes2212.robot.commands.orientation.TurnToTwoTargets;
 import com.spikes2212.robot.subsystems.BallBlocker;
 import com.spikes2212.robot.subsystems.Climber;
@@ -20,6 +23,7 @@ import com.spikes2212.robot.subsystems.GearDropper;
 import com.spikes2212.robot.subsystems.Picker;
 import com.spikes2212.robot.subsystems.Shooter;
 import com.spikes2212.utils.DoubleSpeedcontroller;
+import com.spikes2212.utils.RunnableCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -88,6 +92,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Gears Left", new MoveTurnLeftAndDropGearAuto());
 		autoChooser.addObject("Gears Right", new MoveTurnRightAndDropGearAuto());
 		autoChooser.addObject("Straight", new MoveStraightAuto());
+		autoChooser.addObject("Just Right", new MoveTurnRightAuto());
+		autoChooser.addObject("Just Left", new MoveTurnLeftAuto());
 		SmartDashboard.putData("Auto", autoChooser);
 		SmartDashboard.putBoolean("Oriented", false);
 	}
