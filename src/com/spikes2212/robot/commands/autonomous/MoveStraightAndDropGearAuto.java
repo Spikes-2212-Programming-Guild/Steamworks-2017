@@ -21,9 +21,9 @@ public class MoveStraightAndDropGearAuto extends CommandGroup {
 	public static final Supplier<Double> movingSpeed = ConstantHandler
 			.addConstantDouble("MoveStraightAndDropGearAuto-movingSpeed", -0.3);
 	public static final Supplier<Double> movingTime = ConstantHandler
-			.addConstantDouble("MoveStraightAndDropGearAuto-movingTime", 2);
+			.addConstantDouble("MoveStraightAndDropGearAuto-movingTime", 1.5);
 	public static final Supplier<Double> afterOrientionTime = ConstantHandler
-			.addConstantDouble("MoveStraightAndDropGearAuto-afterOrientionTime", 2.7);
+			.addConstantDouble("MoveStraightAndDropGearAuto-afterOrientionTime", 2.5);
 	public static final Supplier<Double> reverseTime = ConstantHandler
 			.addConstantDouble("MoveStraightAndDropGearAuto-reverseTime", 1);
 	public static final Supplier<Double> reverseSpeed = ConstantHandler
