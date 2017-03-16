@@ -14,11 +14,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class OrientToBoiler extends CommandGroup {
 	public static final Supplier<Double> BOILER_CAMERA_ID = ConstantHandler
 			.addConstantDouble("OrientToBoiler-CAMERA_ID", 0);
+	public static final Supplier<Double> TOLERANCE = ConstantHandler.addConstantDouble("OrientToBoiler-TOLERANCE",
+			0.025);
 
 	public OrientToBoiler(Supplier<Double> turningSpeed) {
 		addSequential(new RunnableCommand(
 				() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera", BOILER_CAMERA_ID.get())));
-		addSequential(new OrientToTwoTargets(turningSpeed));
+		addSequential(new OrientToTwoTargets(turningSpeed, TOLERANCE.get()));
 		addSequential(new WaitCommand(0.3));
 	}
 }

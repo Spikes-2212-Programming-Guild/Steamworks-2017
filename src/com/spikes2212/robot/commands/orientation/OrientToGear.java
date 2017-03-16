@@ -14,11 +14,12 @@ public class OrientToGear extends CommandGroup {
 
 	public static final Supplier<Double> GEAR_CAMERA_ID = ConstantHandler.addConstantDouble("OrientToGear-CAMERA_ID",
 			1);
+	public static final Supplier<Double> TOLERANCE = ConstantHandler.addConstantDouble("OrientToGear-TOLERANCE", 0.05);
 
 	public OrientToGear(Supplier<Double> turningSpeed) {
 		addSequential(new RunnableCommand(
 				() -> ImageProcessingConstants.NETWORK_TABLE.putNumber("currentCamera", GEAR_CAMERA_ID.get())));
-		addSequential(new OrientToTwoTargets(turningSpeed));
+		addSequential(new OrientToTwoTargets(turningSpeed, TOLERANCE.get()));
 	}
 
 }
